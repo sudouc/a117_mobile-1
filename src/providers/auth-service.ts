@@ -40,6 +40,11 @@ export class AuthService {
     public login(credentials) {
         if (credentials.email === null || credentials.password === null) {
             return Observable.throw("Please insert credentials");
+        }
+        else if (credentials.email === "fail") {
+            // Just for local testing if we ender a username 'fail' the observable will
+            // throw an error
+            return Observable.throw("Error communicating with server");
         } else {
             return Observable.create(observer => {
                 // At this point make a request to your backend to make a real check!
@@ -55,6 +60,11 @@ export class AuthService {
     public register(credentials) {
         if (credentials.email === null || credentials.password === null) {
             return Observable.throw("Please insert credentials");
+        }
+        else if (credentials.email === "fail") {
+            // Just for local testing if we ender a username 'fail' the observable will
+            // throw an error
+            return Observable.throw("Error communicating with server");
         } else {
             // At this point store the credentials to your backend!
             return Observable.create(observer => {
