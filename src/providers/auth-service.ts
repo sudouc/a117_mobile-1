@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+
+import { AppConstants, ApiEndpoints } from '../app/constants';
 
 /*
 
@@ -26,66 +26,113 @@ export class User {
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 
-  This class is responsible for handling our authentication state
+  This class is responsible for handling our authentication state and letting us fetch a user
 */
 @Injectable()
 export class AuthService {
     currentUser: User;
+    oauth: any = null;
 
     constructor(public http: Http) {
         console.log('Hello AuthService Provider');
     }
 
-    // Template method for submitting login request
-    public login(credentials) {
+    // Submit a login request
+    public login(credentials): Observable<boolean> {
         if (credentials.email === null || credentials.password === null) {
             return Observable.throw("Please insert credentials");
         }
-        else if (credentials.email === "fail") {
-            // Just for local testing if we ender a username 'fail' the observable will
-            // throw an error
-            return Observable.throw("Error communicating with server");
-        } else {
-            return Observable.create(observer => {
-                // At this point make a request to your backend to make a real check!
-                let access = (credentials.password === "pass" && credentials.email === "email");
-                this.currentUser = new User('Test User', 'test@example.com');
-                observer.next(access);
-                observer.complete();
+
+        // Encapsulating the whole request in an observable means we avoid race conditions with two subscribers (one in this service and in the subscriber)
+        return Observable.create(
+            (observable) => {
+
+                // The JSON request body we fill out
+                let requestBody = {
+                    "grant_type": AppConstants.GRANT_TYPE,
+                    "client_id": AppConstants.CLIENT_ID,
+                    "client_secret": AppConstants.CLIENT_SECRET,
+                    "username": credentials.email,
+                    "password": credentials.password,
+                    "scope": AppConstants.SCOPE
+                };
+
+                // The login http request
+                this.http.post(ApiEndpoints.OAUTH_TOKEN, requestBody).subscribe(
+                    (data) => {
+                        console.log(data.json());
+                        // Store the token and refresh token for later use getting data
+                        this.oauth = data.json();
+
+                        // Provide feedback to the subscriber that we have completed successfully
+                        observable.next(true);
+                        observable.complete();
+                    },
+                    (error) => {
+                        console.error(error.json());
+                        // Discard the token, it's not necessary
+                        this.oauth = null;
+                        // Give the error to the subscriber to deal with
+                        observable.error(error.json());
+                    }
+                )
             });
-        }
     }
 
-    // Template method for submitting register request
-    public register(credentials) {
-        if (credentials.email === null || credentials.password === null) {
+    // Submit register request
+    public register(userInfo): Observable<boolean> {
+        if (userInfo.email === null || userInfo.password === null || userInfo.name === null) {
             return Observable.throw("Please insert credentials");
         }
-        else if (credentials.email === "fail") {
-            // Just for local testing if we ender a username 'fail' the observable will
-            // throw an error
-            return Observable.throw("Error communicating with server");
-        } else {
-            // At this point store the credentials to your backend!
-            return Observable.create(observer => {
-                observer.next(true);
-                observer.complete();
+
+        // Encapsulating the whole request in an observable means we avoid race conditions with two subscribers (one in this service and in the subscriber)
+        return Observable.create(
+            (observer) => {
+                this.http.post(ApiEndpoints.USER_CREATE, userInfo).subscribe(
+                    (success) => {
+                        // In the request success re notify our subscriber that the request succeeded
+                        observer.next(true);
+                        observer.complete();
+                    },
+                    (error) => {
+                        // Give the error to the subscriber to deal with
+                        console.log(error.json());
+                        observer.error(error.json());
+                    }
+                )
             });
-        }
     }
 
-    // Return the current user object
-    public getUserInfo(): User {
+    // Get the user if there is one
+    public getUser() {
         return this.currentUser;
     }
 
-    // Template method for logging out the current user
-    public logout() {
-        return Observable.create(observer => {
-            this.currentUser = null;
-            observer.next(true);
-            observer.complete();
-        });
+    // Request the user details
+    public requestUser(): Observable<Response> {
+
+        let options = new RequestOptions({ headers: this.getHeaders() });
+        let userRequest = this.http.get(ApiEndpoints.USER, options);
+
+        userRequest.subscribe(
+            (data) => {
+                this.currentUser = data.json();
+            }
+        )
+
+        return userRequest;
+    }
+
+    // Get Authentication Headers
+    getHeaders() {
+        let headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + this.oauth.access_token)
+        return headers;
+    }
+
+    // Return true if logged in, else false
+    public isLoggedIn() {
+        return !!this.oauth;
     }
 
 }

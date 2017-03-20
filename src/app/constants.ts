@@ -1,0 +1,14 @@
+
+export class AppConstants {
+    public static API_DOMAIN = 'https://api.a117.sudo.org.au';
+    public static CLIENT_ID = '1';
+    public static GRANT_TYPE = 'password';
+    public static CLIENT_SECRET = 'Gt3PKGqmzkrQLGruX61XFaJqd6jl1MdQyRigSMYB';
+    public static SCOPE = '';
+}
+
+export class ApiEndpoints {
+    public static OAUTH_TOKEN = AppConstants.API_DOMAIN + '/oauth/token';
+    public static USER = AppConstants.API_DOMAIN + '/api/user';
+    public static USER_CREATE = ApiEndpoints.USER + '/create';
+}

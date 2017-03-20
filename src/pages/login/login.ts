@@ -44,22 +44,17 @@ export class LoginPage {
         // present the loading dialog while we submit the data
         this.showLoading();
 
-        // Subscribe to the result of the login attempt and then
+        // Subscribe to the result of the login attempt
         this.auth.login(this.loginCredentials).subscribe(
-            (allowed) => {
-                // 'allowed' is the return value of the observable, in this case it's a boolean
-                // This first anonymous method is called when the observable completes successfully
-                if (allowed) {
-                    this.loading.dismiss();
-                    // TODO: Root may change depending on where we got to the login page from (use a separate statement with a switch?)
-                    this.navCtrl.setRoot(CurrentUserPage);
-                } else {
-                    this.showError("Access Denied");
-                }
+            (success) => {
+                // 'success' is the return value of the observable, the AuthService.login method resolves true for this, but if success is being called we don't really care about the value, we're just going to switch to the CurrentUserPage
+                this.loading.dismiss();
+                // TODO: Root may change depending on where we got to the login page from (use a separate statement with a switch?)
+                this.navCtrl.setRoot(CurrentUserPage);
             },
             (error) => {
                 // This second anonymous method is called if there is some error with the observable
-                this.showError(error);
+                this.showError(error.message);
             });
     }
 
@@ -78,7 +73,7 @@ export class LoginPage {
         this.loading.dismiss();
 
         let alert = this.alertCtrl.create({
-            title: 'Fail',
+            title: 'Error',
             subTitle: text,
             buttons: ['OK']
         });

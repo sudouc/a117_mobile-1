@@ -18,7 +18,7 @@ export class RegisterPage {
     // Flag to indicate whether or not the register request has been successful
     createSuccess = false;
     // Variable for binding to the form values
-    registerCredentials = { email: '', password: '' };
+    registerCredentials = { email: '', password: '', name: '' };
 
     constructor(
         public navCtrl: NavController,
@@ -52,7 +52,7 @@ export class RegisterPage {
             },
             // Error completing Observable anonymous function
             (error) => {
-                this.showPopup("Error", error);
+                this.showPopup(error.error, error.message);
             });
     }
 

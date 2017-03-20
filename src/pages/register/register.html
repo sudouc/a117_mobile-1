@@ -25,6 +25,11 @@
                 <ion-col>
                     <!--The inset directive is important - it makes the list indented nicely-->
                     <ion-list inset>
+                        <!--Begin Name Field-->
+                        <ion-item>
+                            <ion-input type="text" placeholder="Name" name="name" [(ngModel)]="registerCredentials.name" required></ion-input>
+                        </ion-item>
+                        <!--End Name Field-->
                         <!--Begin Email Field-->
                         <ion-item>
                             <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
