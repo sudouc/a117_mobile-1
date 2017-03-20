@@ -6,13 +6,25 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Me</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <!--Display the user's name or "Me" in the title bar-->
+        <ion-title>{{currentUser?.name || "Me"}}</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <ion-card>
+        <ion-card-header>
+            Your Info
+        </ion-card-header>
+        <ion-card-content>
+            <strong>Name:</strong> {{currentUser?.name}}
+            <br>
+            <strong>Email:</strong> {{currentUser?.email}}
+            <br>
+            <strong>Created:</strong> {{currentUser?.created_at | date}}
+        </ion-card-content>
+    </ion-card>
 </ion-content>

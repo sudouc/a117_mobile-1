@@ -29,7 +29,7 @@ export class CurrentUserPage {
         console.log('ionViewCanEnter CurrentUserPage');
 
         // If we're not logged in, navigate to the login screen
-        if (!this.auth.getUserInfo()) {
+        if (!this.auth.isLoggedIn()) {
             this.navCtrl.setRoot(LoginPage); // TODO, use a parameter to say which page we were coming from so we can be redirected after login
         }
         // Don't return anything because that would actually interrupt the navigation flow and
@@ -38,6 +38,20 @@ export class CurrentUserPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad CurrentUserPage');
+    }
+
+    // As we enter the view, populate the user object from the auth service
+    ionViewWillEnter() {
+
+        this.currentUser = this.auth.getUser();             // Try and get the stored user object
+
+        if (!this.currentUser && this.auth.isLoggedIn()){   // If we don't have a stored user object, fire off a request
+            this.auth.requestUser().subscribe(
+                (data) => {
+                    this.currentUser = data.json();
+                }
+            )
+        }
     }
 
 }
