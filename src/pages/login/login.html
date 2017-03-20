@@ -1,0 +1,63 @@
+<!--
+  Generated template for the Login page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Login</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <ion-row>
+        <ion-col></ion-col>
+        <!--Begin Header Image-->
+        <ion-col col-8>
+            <img src="http://placehold.it/300x200" />
+        </ion-col>
+        <!--End Header Image-->
+        <ion-col></ion-col>
+    </ion-row>
+
+    <div>
+        <form (ngSubmit)="login()" #loginForm="ngForm">
+
+            <ion-row>
+                <ion-col>
+                    <!--The inset directive is important - it makes the list indented nicely-->
+                    <ion-list inset>
+                        <!--Begin Email Field-->
+                        <ion-item>
+                            <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="loginCredentials.email" required></ion-input>
+                        </ion-item>
+                        <!--End Email Field-->
+                        <!--Begin Password Field-->
+                        <ion-item>
+                            <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="loginCredentials.password" required></ion-input>
+                        </ion-item>
+                        <!--End Password Field-->
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <!--Begin Submit Button-->
+                    <!--We are checking whether or not the form model we declared earlier is valid (check out angular2 form validation) and are using that flag to decide whether or not to activate the button-->
+                    <button ion-button full type="submit" [disabled]="!loginForm.form.valid">Login</button>
+                    <!--End Submit Button-->
+                    <!--Begin Create Account Button-->
+                    <button ion-button block clear (click)="goToRegisterPage()">Register New Account</button>
+                    <!--End Create Account Button-->
+                </ion-col>
+            </ion-row>
+
+        </form>
+    </div>
+
+</ion-content>
