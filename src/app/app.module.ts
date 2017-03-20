@@ -12,6 +12,8 @@ import { AuthService } from '../providers/auth-service';
 import { RegisterPage } from '../pages/register/register';
 import { CurrentUserPage } from '../pages/currentuser/currentuser';
 
+import { UnitDetailsPage } from '../pages/unit-details/unit-details';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -20,7 +22,8 @@ import { CurrentUserPage } from '../pages/currentuser/currentuser';
     TabsPage,
     LoginPage,
     RegisterPage,
-    CurrentUserPage
+    CurrentUserPage,
+    UnitDetailsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -33,7 +36,8 @@ import { CurrentUserPage } from '../pages/currentuser/currentuser';
     TabsPage,
     LoginPage,
     RegisterPage,
-    CurrentUserPage
+    CurrentUserPage,
+    UnitDetailsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService]
 })

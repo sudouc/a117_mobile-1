@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { UnitDetailsPage } from '../unit-details/unit-details';
+
 /*
-  Generated class for the Units page.
+  Units List page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
@@ -97,5 +99,6 @@ export class UnitsPage {
     // so that we can fetch further information on that from the API
     public itemSelected(item) {
         console.log('Item selected: ' + item.id + " " + item.unit_code + " " + item.name)
+        this.navCtrl.push(UnitDetailsPage);
     }
 }
