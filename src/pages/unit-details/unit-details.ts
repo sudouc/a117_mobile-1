@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { UnitsProvider } from '../../providers/units-provider';
 
 /*
   Generated class for the UnitDetails page.
@@ -8,15 +9,37 @@ import { NavController, NavParams } from 'ionic-angular';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-unit-details',
-  templateUrl: 'unit-details.html'
+    selector: 'page-unit-details',
+    templateUrl: 'unit-details.html'
 })
 export class UnitDetailsPage {
+    unit: any; // It would be a good idea to more strongly type this
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        private unitsProvider: UnitsProvider) { }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UnitDetailsPage');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad UnitDetailsPage');
+    }
+
+    ionViewWillEnter() {
+        // Fetch the unit details
+        this.getUnit();
+    }
+
+    getUnit() {
+        // Grab the unit id out of the nav parameter
+        let unit_id = this.navParams.get('unit_id');
+        this.unitsProvider.getUnit(unit_id).subscribe(
+            (data) => {
+                this.unit = data;
+            },
+            (error) => {
+                alert(error);
+            }
+        )
+    }
 
 }

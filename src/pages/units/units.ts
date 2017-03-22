@@ -95,10 +95,15 @@ export class UnitsPage {
     }
 
     // Click callback when one of the items in the list is clicked on
-    // We will use this to navigate to a details view, passing the item ID
+    // We use this to navigate to a details view, passing the item ID
     // so that we can fetch further information on that from the API
     public itemSelected(item) {
         console.log('Item selected: ' + item.id + " " + item.unit_code + " " + item.name)
-        this.navCtrl.push(UnitDetailsPage);
+
+        this.navCtrl.push(
+            UnitDetailsPage,
+            // Provide the unit id as a nav parameter
+            { unit_id: item.id }
+        );
     }
 }
