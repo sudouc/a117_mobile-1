@@ -18,19 +18,22 @@ export class UnitsProvider {
         console.log('Hello UnitsProvider Provider');
     }
 
-    public getUnit(unit_id){
+    public getUnit(unit_id) {
         // Make a request for a specific unit
 
         // Encapsulating the whole request in an observable means we avoid race conditions with two subscribers (one in this service and in the subscriber)
         return Observable.create(
             (observable) => {
                 // Make the HTTP request
-                this.http.get(ApiEndpoints.UNITS + '/' + unit_id
-                ).map(
+                this.http.get(ApiEndpoints.UNITS + '/' + unit_id)
+                    .map((response) => response.json())
                     // map is just a function that gets applied no matter what comes back
                     // in this case we use it to always convert the object to a json representation of the response body
-                    (response) => response.json()
-                ).subscribe(
+                    .subscribe(
+                    // To the subscribe method we pass several anonymous methods that are called
+                    // Under different circumstances (e.g. success, error)
+                    // Check the docs for more info
+                    // http://reactivex.io/documentation/operators/subscribe.html
                     (data) => {
                         console.log(data);
                         observable.next();
@@ -39,8 +42,7 @@ export class UnitsProvider {
                     (error) => {
                         console.log(error);
                         observable.error(error);
-                    }
-                )
+                    })
             }
         );
     }
