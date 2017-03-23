@@ -9,6 +9,8 @@ export class AppConstants {
 
 export class ApiEndpoints {
     public static OAUTH_TOKEN = AppConstants.API_DOMAIN + '/oauth/token';
-    public static USER = AppConstants.API_DOMAIN + '/api/user';
+    public static API = AppConstants.API_DOMAIN + '/api';
+    public static USER = ApiEndpoints.API+ '/user';
     public static USER_CREATE = ApiEndpoints.USER + '/create';
+    public static UNITS = ApiEndpoints.API + '/units';
 }
