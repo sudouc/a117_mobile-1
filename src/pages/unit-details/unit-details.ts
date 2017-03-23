@@ -27,6 +27,7 @@ export class UnitDetailsPage {
     ionViewWillEnter() {
         // Fetch the unit details
         this.getUnit();
+        // TODO fetch comments + display them
     }
 
     getUnit() {
@@ -46,5 +47,7 @@ export class UnitDetailsPage {
             }
         )
     }
+
+    // TODO, fetch comments
 
 }
