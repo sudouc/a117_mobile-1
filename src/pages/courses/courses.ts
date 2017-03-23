@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { CourseDetailsPage } from '../course-details/course-details';
+
 /*
   Generated class for the Courses page.
 
@@ -96,7 +98,13 @@ export class CoursesPage {
     // We will use this to navigate to a details view, passing the item ID
     // so that we can fetch further information on that from the API
     public itemSelected(item) {
-        console.log('Item selected: ' + item.id + " " + item.course_code + " " + item.name)
+        console.log('Item selected: ' + item.id + " " + item.course_code + " " + item.name);
+
+        this.navCtrl.push(
+            CourseDetailsPage,
+            // Provide the course id as a nav parameter
+            { id: item.id }
+        );
     }
 
 }
