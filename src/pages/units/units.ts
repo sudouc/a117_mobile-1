@@ -36,7 +36,7 @@ export class UnitsPage {
                 id: 0
             },
             {
-                name: "A Long History of Very Little",
+                name: "A Long History of UC",
                 unit_code: "1234",
                 id: 1
             },
@@ -46,7 +46,7 @@ export class UnitsPage {
                 id: 2
             },
             {
-                name: "Airconditioner Repair",
+                name: "Moving TV's with lifts",
                 unit_code: "5647",
                 id: 3
             },
