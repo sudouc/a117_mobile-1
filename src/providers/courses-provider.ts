@@ -25,7 +25,7 @@ export class CoursesProvider {
         return Observable.create(
             (observable) => {
                 // Make the HTTP request
-                this.http.get(ApiEndpoints.COURSES + '/' + AppConstants.ALL)
+                this.http.get(ApiEndpoints.COURSES)
                     .map((response) => response.json())
                     // map is just a function that gets applied no matter what comes back
                     // in this case we use it to always convert the object to a json representation of the response body

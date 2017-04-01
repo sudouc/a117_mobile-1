@@ -14,8 +14,7 @@ export class ApiEndpoints {
     public static USER = ApiEndpoints.API + '/user';
     public static USER_CREATE = ApiEndpoints.USER + '/create';
     public static UNITS = ApiEndpoints.API + '/units';
-    public static UNITS_ALL = ApiEndpoints.UNITS + '/all';
-    public static COURSES = ApiEndpoints.API + '/course';
+    public static COURSES = ApiEndpoints.API + '/courses';
     public static FACULTIES = ApiEndpoints.API + '/faculties';
-    public static SEARCH = ApiEndpoints.API + '/search';
-}
+    public static SEARCH_ALL = ApiEndpoints.API + '/search';
+    public static SEARCH_COURSE = ApiEndpoints.SEARCH_ALL + '/courses';}

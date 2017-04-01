@@ -18,11 +18,11 @@ export class SearchProvider {
     console.log('Hello SearchProvider Provider');
   }
 
-  public getSearchResult(input){
+  public getSearchResultAll(input){
 
     return Observable.create(
         (observable) => {
-            this.http.get(ApiEndpoints.SEARCH + "/?=" + input)
+            this.http.get(ApiEndpoints.SEARCH_ALL + "?=" + input)
             .map((response) => response.json())
             .subscribe(
                 (data) => {
