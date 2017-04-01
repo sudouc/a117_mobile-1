@@ -16,6 +16,7 @@ import { LoginPage } from '../login/login';
 })
 export class CurrentUserPage {
     currentUser: User;
+    imgUrl="http://placehold.it/80x80";
 
     constructor(
         public navCtrl: NavController,
