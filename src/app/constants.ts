@@ -5,6 +5,7 @@ export class AppConstants {
     public static GRANT_TYPE = 'password';
     public static CLIENT_SECRET = 'Gt3PKGqmzkrQLGruX61XFaJqd6jl1MdQyRigSMYB';
     public static SCOPE = '';
+    public static ALL = "all";
 }
 
 export class ApiEndpoints {

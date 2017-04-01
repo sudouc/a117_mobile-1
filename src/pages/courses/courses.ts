@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
+import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { CoursesProvider } from '../../providers/courses-provider'
 import { CourseDetailsPage } from '../course-details/course-details';
 
 /*
@@ -17,56 +17,88 @@ export class CoursesPage {
     searchText: string = '';
     items: any[];
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) { }
+    constructor(public navCtrl: NavController, public navParams: NavParams, public coursesProv: CoursesProvider, 
+        private alertCtrl: AlertController) { }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad CoursesPage');
 
         // Populate the list of items when this view loads
-        this.getItems();
+        // this.getItems();
+        // this.items = this.coursesProv.getCourseList();
+
+        this.getCourseDataList();
+
+    }
+
+    public getCourseDataList(){
+        this.coursesProv.getCourses().subscribe(
+                (success) => {
+                    // (data)
+                    
+                    // 'success' is the return value of the observable, 
+                    // the CourseProvider.getCourses method resolves true for this, 
+                    // but if success is being called we don't really care about the value,
+                    //  we're just going to display the list in the view
+                     this.items = this.coursesProv.getCourseList();
+                },
+                (error) => {
+                    // This second anonymous method is called if there is some error with the observable
+                    this.showError(error.message);
+                });
+        }
+    
+
+    public showError(text) {
+        let alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: text,
+            buttons: ['OK']
+        });
+        alert.present();
     }
 
     // Helper method that gets us a clean list of items
     // This could actually be a web API call or we could be loading from memory or storage
-    getItems() {
-        this.items = [
-            {
-                name: "Bachelor of Engineering in Network and Software Engineering",
-                course_code: "344JA",
-                id: 0
-            },
-            {
-                name: "Bachelor of Software Engineering",
-                course_code: "560AA",
-                id: 1
-            },
-            {
-                name: "Bachelor of Sports Media",
-                course_code: "698AA",
-                id: 2
-            },
-            {
-                name: "Bachelor of Communication in Media and Public Affairs",
-                course_code: "213JA",
-                id: 3
-            },
-            {
-                name: "Bachelor of Communication in Advertising",
-                course_code: "211JA",
-                id: 4
-            },
-            {
-                name: "Bachelor of Science in Psychology",
-                course_code: "780AA",
-                id: 5
-            }
-        ]
-    }
+    // getItems() {
+    //     this.items = [
+    //         {
+    //             name: "Bachelor of Engineering in Network and Software Engineering",
+    //             course_code: "344JA",
+    //             id: 0
+    //         },
+    //         {
+    //             name: "Bachelor of Software Engineering",
+    //             course_code: "560AA",
+    //             id: 1
+    //         },
+    //         {
+    //             name: "Bachelor of Sports Media",
+    //             course_code: "698AA",
+    //             id: 2
+    //         },
+    //         {
+    //             name: "Bachelor of Communication in Media and Public Affairs",
+    //             course_code: "213JA",
+    //             id: 3
+    //         },
+    //         {
+    //             name: "Bachelor of Communication in Advertising",
+    //             course_code: "211JA",
+    //             id: 4
+    //         },
+    //         {
+    //             name: "Bachelor of Science in Psychology",
+    //             course_code: "780AA",
+    //             id: 5
+    //         }
+    //     ]
+    // }
 
     // Handler for presses on the cancel button
     public searchCancel(event: any) {
         // Reset this list of courses to default (the search bar is cleared automatically by ionic)
-        this.getItems();
+        this.items = this.coursesProv.getCourseList();
         // This could be a web request to repopulate the list, or restore from storage for speed
     }
 
@@ -75,7 +107,7 @@ export class CoursesPage {
     // We don't actually use the contents of the event parameter in this one, but we could get the sample text from it rather than from
     public searchInput(event: any) {
         // Reset items back to all of the items
-        this.getItems();
+        this.items = this.coursesProv.getCourseList();
 
         // If the value is an empty/whitespace string don't filter the items, there would be no point
         if (this.searchText && this.searchText.trim() != '') {

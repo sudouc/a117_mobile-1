@@ -13,8 +13,9 @@ import { CoursesProvider } from '../../providers/courses-provider';
     templateUrl: 'course-details.html'
 })
 export class CourseDetailsPage {
-    course: any; // It would be a good idea to more strongly type this
-
+    course: {name: string, unit_code: string}; // It would be a good idea to more strongly type this
+    course2: {name: string, unit_code: string}; 
+    
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -26,7 +27,10 @@ export class CourseDetailsPage {
 
     ionViewWillEnter() {
         // Fetch the course details
+        this.course = {name: "", unit_code: ""};
         this.getCourse();
+        this.course2.name = "Testing";
+        this.course2.unit_code = "Unit Code Test"
         // TODO fetch comments + display them (if we're allowing comments on Courses?)
     }
 
@@ -34,11 +38,24 @@ export class CourseDetailsPage {
         // Grab the unit id out of the nav parameter
         let id = this.navParams.get('id');
 
+        console.log(id);
+
         // Request the unit details from the provider
         // We may want to show a loading icon while this is happening
         this.coursesProvider.getCourse(id).subscribe(
             (data) => {
+                // this.course.name = data.name;
+                // this.course.course_code = data.unit_code;
+                console.log(id);
+                this.course = this.coursesProvider.getCourseDetails();
+
+                console.log(this.course);
+                console.log(this.course.name);
+                console.log(data);
                 this.course = data;
+                console.log(this.course);
+                
+                // console.log(this.course.name);
             },
             (error) => {
                 // Currently we're just displaying the error
