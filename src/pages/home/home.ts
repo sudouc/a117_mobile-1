@@ -13,7 +13,7 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class HomePage {
 
-  faculties: any = [];
+  faculties: any = [{id:1, name: "ESTEM"},{id:2,name:"health"},{id:3,name:"whatever"}];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
@@ -24,6 +24,8 @@ export class HomePage {
   getFaculties(){
     console.log('getFaculties HomePage');
   }
+
+  getItem
 
   /*Search*/
   searchInput(event: any){
