@@ -13,10 +13,20 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class HomePage {
 
+  faculties: any = [];
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
   }
 
+  getFaculties(){
+    console.log('getFaculties HomePage');
+  }
+
+  /*Search*/
+  searchInput(event: any){
+
+  }
 }
