@@ -63,7 +63,7 @@ export class UnitsProvider {
                     // http://reactivex.io/documentation/operators/subscribe.html
                     (data) => {
                         console.log(data);
-                        observable.next();
+                        observable.next(data);
                         observable.complete();
                     },
                     (error) => {
