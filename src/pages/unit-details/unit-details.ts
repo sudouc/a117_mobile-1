@@ -33,11 +33,13 @@ export class UnitDetailsPage {
     getUnit() {
         // Grab the unit id out of the nav parameter
         let unit_id = this.navParams.get('unit_id');
+        
 
         // Request the unit details from the provider
         // We may want to show a loading icon while this is happening
         this.unitsProvider.getUnit(unit_id).subscribe(
             (data) => {
+                console.log(data);
                 this.unit = data;
             },
             (error) => {
