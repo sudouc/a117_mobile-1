@@ -35,12 +35,10 @@ export class CoursesProvider {
                     // Check the docs for more info
                     // http://reactivex.io/documentation/operators/subscribe.html
                     (data) => {
-                        console.log(data);
                         observable.next(data);
                         observable.complete();
                     },
                     (error) => {
-                        console.log(error);
                         observable.error(error);
                     }
                     )
@@ -65,14 +63,11 @@ export class CoursesProvider {
                     // Check the docs for more info
                     // http://reactivex.io/documentation/operators/subscribe.html
                     (data) => {
-                        console.log("Courses provider got data:");
-                        console.log(data);
                         observable.next(data);
                         observable.complete();
 
                     },
                     (error) => {
-                        console.log(error);
                         observable.error(error);
                     })
             });
