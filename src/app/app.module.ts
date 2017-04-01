@@ -19,6 +19,8 @@ import { CourseDetailsPage } from '../pages/course-details/course-details';
 import { CoursesProvider } from '../providers/courses-provider';
 
 import { HomePage } from '../pages/home/home';
+import { FacultiesProvider } from '../providers/faculties-provider';
+
 @NgModule({
     declarations: [
         MyApp,
@@ -52,7 +54,8 @@ import { HomePage } from '../pages/home/home';
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         AuthService,
         UnitsProvider,
-        CoursesProvider
+        CoursesProvider,
+        FacultiesProvider
     ]
 })
 export class AppModule { }
