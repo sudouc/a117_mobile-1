@@ -78,4 +78,14 @@ export class UnitsPage {
             { unit_id: item.id }
         );
     }
+
+    public showContent()
+    {
+        return !!this.items;
+    }
+
+    public notShowContent()
+    {
+        return !this.items;
+    }
 }
