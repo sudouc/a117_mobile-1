@@ -32,11 +32,20 @@
                         Your Info
                     </ion-card-header>
                     <ion-card-content>
-                        <strong>Name:</strong> {{currentUser?.name}}
-                        <br>
-                        <strong>Email:</strong> {{currentUser?.email}}
-                        <br>
-                        <strong>Created:</strong> {{currentUser?.created_at | date}}
+                        <ion-list>
+                            <ion-item>
+                                <ion-icon name="person" item-left></ion-icon>
+                                {{currentUser?.name || "Name Not Found"}}
+                            </ion-item>
+                            <ion-item>
+                                <ion-icon name="mail" item-left></ion-icon>
+                                {{currentUser?.email || "Email Not Found"}}
+                            </ion-item>
+                            <ion-item>
+                                <ion-icon name="clock" item-left></ion-icon>
+                                {{(currentUser?.created_at | date) || "Created Not Found"}}
+                            </ion-item>
+                        </ion-list>
                     </ion-card-content>
                 </ion-card>
             </ion-col>
