@@ -18,4 +18,23 @@ export class SearchProvider {
     console.log('Hello SearchProvider Provider');
   }
 
+  public getSearchResult(input){
+
+    return Observable.create(
+        (observable) => {
+            this.http.get(ApiEndpoints.SEARCH + "/?=" + input)
+            .map((response) => response.json())
+            .subscribe(
+                (data) => {
+                    console.log(data);
+                    observable.next();
+                    observable.complete();
+                },
+                (error) => {
+                    console.log(error);
+                    observable.error(error);
+                })
+        }
+    );
+  }
 }

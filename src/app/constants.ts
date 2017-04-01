@@ -15,4 +15,5 @@ export class ApiEndpoints {
     public static UNITS = ApiEndpoints.API + '/units';
     public static COURSES = ApiEndpoints.API + '/courses';
     public static FACULTIES = ApiEndpoints.API + '/faculties';
+    public static SEARCH = ApiEndpoints.API + '/search';
 }
