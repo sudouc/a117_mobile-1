@@ -29,40 +29,12 @@ export class UnitsPage {
     // Helper method that gets us a clean list of items
     // This could actually be a web API call or we could be loading from memory or storage
     getItems() {
-        this.items = [
-            {
-                name: "A Brief History of Everything",
-                unit_code: "8763",
-                id: 0
-            },
-            {
-                name: "A Long History of UC",
-                unit_code: "1234",
-                id: 1
-            },
-            {
-                name: "Sudo Workshop Weekend",
-                unit_code: "8765",
-                id: 2
-            },
-            {
-                name: "Moving TV's with lifts",
-                unit_code: "5647",
-                id: 3
-            },
-            {
-                name: "Game Programming",
-                unit_code: "1337",
-                id: 4
-            },
-            {
-                name: "Cooking for Yourself at Uni",
-                unit_code: "4702",
-                id: 5
-            }
-        ]
+        this.unitsProvider.getUnits().subscribe(
+            (response) => {
+                this.items = response;
+            } 
+        );   
     }
-
     // Handler for presses on the cancel button
     public searchCancel(event: any) {
         // Reset this list of units to default (the search bar is cleared automatically by ionic)
