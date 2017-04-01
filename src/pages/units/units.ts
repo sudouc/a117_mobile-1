@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { UnitsProvider } from '../../providers/units-provider';
 import { UnitDetailsPage } from '../unit-details/unit-details';
 
 /*
@@ -17,7 +17,7 @@ export class UnitsPage {
     searchText: string = '';
     items: any[];
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) { }
+    constructor(public navCtrl: NavController, public navParams: NavParams, private unitsProvider: UnitsProvider) { }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad UnitsPage');
@@ -29,40 +29,12 @@ export class UnitsPage {
     // Helper method that gets us a clean list of items
     // This could actually be a web API call or we could be loading from memory or storage
     getItems() {
-        this.items = [
-            {
-                name: "A Brief History of Everything",
-                unit_code: "8763",
-                id: 0
-            },
-            {
-                name: "A Long History of Very Little",
-                unit_code: "1234",
-                id: 1
-            },
-            {
-                name: "Sudo Workshop Weekend",
-                unit_code: "8765",
-                id: 2
-            },
-            {
-                name: "Airconditioner Repair",
-                unit_code: "5647",
-                id: 3
-            },
-            {
-                name: "Game Programming",
-                unit_code: "1337",
-                id: 4
-            },
-            {
-                name: "Cooking for Yourself at Uni",
-                unit_code: "4702",
-                id: 5
-            }
-        ]
+        this.unitsProvider.getUnits().subscribe(
+            (response) => {
+                this.items = response;
+            } 
+        );   
     }
-
     // Handler for presses on the cancel button
     public searchCancel(event: any) {
         // Reset this list of units to default (the search bar is cleared automatically by ionic)
@@ -75,7 +47,6 @@ export class UnitsPage {
     // We don't actually use the contents of the event parameter in this one, but we could get the sample text from it rather than from
     public searchInput(event: any) {
         // Reset items back to all of the items
-        this.getItems();
 
         // If the value is an empty/whitespace string don't filter the items, there would be no point
         if (this.searchText && this.searchText.trim() != '') {
@@ -105,5 +76,10 @@ export class UnitsPage {
             // Provide the unit id as a nav parameter
             { unit_id: item.id }
         );
+    }
+
+    public showContent()
+    {
+        return !!this.items;
     }
 }

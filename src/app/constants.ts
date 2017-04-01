@@ -5,6 +5,7 @@ export class AppConstants {
     public static GRANT_TYPE = 'password';
     public static CLIENT_SECRET = 'Gt3PKGqmzkrQLGruX61XFaJqd6jl1MdQyRigSMYB';
     public static SCOPE = '';
+    public static ALL = "all";
 }
 
 export class ApiEndpoints {
@@ -13,5 +14,6 @@ export class ApiEndpoints {
     public static USER = ApiEndpoints.API + '/user';
     public static USER_CREATE = ApiEndpoints.USER + '/create';
     public static UNITS = ApiEndpoints.API + '/units';
+    public static UNITS_ALL = ApiEndpoints.UNITS + '/all';
     public static COURSES = ApiEndpoints.API + '/courses';
 }

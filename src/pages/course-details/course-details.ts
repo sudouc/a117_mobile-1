@@ -13,7 +13,7 @@ import { CoursesProvider } from '../../providers/courses-provider';
     templateUrl: 'course-details.html'
 })
 export class CourseDetailsPage {
-    course: any; // It would be a good idea to more strongly type this
+    course: { name: string, unit_code: string }; // It would be a good idea to more strongly type this
 
     constructor(
         public navCtrl: NavController,
@@ -25,7 +25,6 @@ export class CourseDetailsPage {
     }
 
     ionViewWillEnter() {
-        // Fetch the course details
         this.getCourse();
         // TODO fetch comments + display them (if we're allowing comments on Courses?)
     }
