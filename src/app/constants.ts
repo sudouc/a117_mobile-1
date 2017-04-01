@@ -17,4 +17,5 @@ export class ApiEndpoints {
     public static COURSES = ApiEndpoints.API + '/courses';
     public static FACULTIES = ApiEndpoints.API + '/faculties';
     public static SEARCH_ALL = ApiEndpoints.API + '/search';
-    public static SEARCH_COURSE = ApiEndpoints.SEARCH_ALL + '/courses';}
+    public static SEARCH_COURSE = ApiEndpoints.SEARCH_ALL + '/courses';
+}
