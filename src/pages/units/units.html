@@ -27,7 +27,7 @@
             {{ item.unit_code }}: {{ item.name }}
         </ion-item>
     </ion-list>
-    <ion-card *ngIf="notShowContent()">
+    <ion-card *ngIf="!showContent()">
         <ion-card-content>
             There are no units to show
         </ion-card-content>

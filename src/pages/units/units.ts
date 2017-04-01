@@ -47,7 +47,6 @@ export class UnitsPage {
     // We don't actually use the contents of the event parameter in this one, but we could get the sample text from it rather than from
     public searchInput(event: any) {
         // Reset items back to all of the items
-        this.getItems();
 
         // If the value is an empty/whitespace string don't filter the items, there would be no point
         if (this.searchText && this.searchText.trim() != '') {
@@ -82,10 +81,5 @@ export class UnitsPage {
     public showContent()
     {
         return !!this.items;
-    }
-
-    public notShowContent()
-    {
-        return !this.items;
     }
 }
