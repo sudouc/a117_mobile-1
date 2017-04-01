@@ -18,7 +18,7 @@ import { UnitsProvider } from '../providers/units-provider';
 import { CourseDetailsPage } from '../pages/course-details/course-details';
 import { CoursesProvider } from '../providers/courses-provider';
 
-
+import { HomePage } from '../pages/home/home';
 @NgModule({
     declarations: [
         MyApp,
@@ -29,7 +29,8 @@ import { CoursesProvider } from '../providers/courses-provider';
         RegisterPage,
         CurrentUserPage,
         UnitDetailsPage,
-        CourseDetailsPage
+        CourseDetailsPage,
+        HomePage
     ],
     imports: [
         IonicModule.forRoot(MyApp)
@@ -44,7 +45,8 @@ import { CoursesProvider } from '../providers/courses-provider';
         RegisterPage,
         CurrentUserPage,
         UnitDetailsPage,
-        CourseDetailsPage
+        CourseDetailsPage,
+        HomePage
     ],
     providers: [
         { provide: ErrorHandler, useClass: IonicErrorHandler },
