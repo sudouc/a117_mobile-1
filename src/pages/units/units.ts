@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { UnitsProvider } from '../../providers/units-provider';
 import { UnitDetailsPage } from '../unit-details/unit-details';
 
 /*
@@ -17,7 +17,7 @@ export class UnitsPage {
     searchText: string = '';
     items: any[];
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) { }
+    constructor(public navCtrl: NavController, public navParams: NavParams, private unitsProvider: UnitsProvider) { }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad UnitsPage');
