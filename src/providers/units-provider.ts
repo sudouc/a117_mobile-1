@@ -18,6 +18,33 @@ export class UnitsProvider {
         console.log('Hello UnitsProvider Provider');
     }
 
+    public getUnits() {
+        //request all units 
+       return Observable.create(
+            (observable) => {
+                // Make the HTTP request
+                    this.http.get(ApiEndpoints.UNITS_ALL)
+                    .map((response) => response.json())
+                    // map is just a function that gets applied no matter what comes back
+                    // in this case we use it to always convert the object to a json representation of the response body
+                    .subscribe(
+                    // To the subscribe method we pass several anonymous methods that are called
+                    // Under different circumstances (e.g. success, error)
+                    // Check the docs for more info
+                    // http://reactivex.io/documentation/operators/subscribe.html
+                    (data) => {
+                        console.log(data);
+                        observable.next(data);
+                        observable.complete();
+                    },
+                    (error) => {
+                        console.log(error);
+                        observable.error(error);
+                })
+            }
+       );
+    }
+
     public getUnit(unit_id) {
         // Make a request for a specific unit
 
@@ -46,5 +73,4 @@ export class UnitsProvider {
             }
         );
     }
-
 }
