@@ -47,4 +47,8 @@ export class HomePage {
   public searchCancel(){
       this.getPlaceholderItems();
   }
+
+  public itemSelected(item){
+      console.log("Selected: " + JSON.stringify(item));
+  }
 }
