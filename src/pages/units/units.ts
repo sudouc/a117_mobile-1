@@ -17,13 +17,13 @@ export class UnitsPage {
     searchText: string = '';
     items: any[];
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private unitsProvider: UnitsProvider) { 
+    constructor(public navCtrl: NavController, public navParams: NavParams, private unitsProvider: UnitsProvider, private alertCtrl: AlertController) {
         this.searchText = navParams.get('searchParam');
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad UnitsPage ' + this.searchText);
-        this.getItems(); 
+        this.getItems();
     }
 
     // Helper method that gets us a clean list of items
@@ -32,7 +32,7 @@ export class UnitsPage {
         this.unitsProvider.getUnits().subscribe(
             (response) => {
                 this.items = response;
-                if (this.searchText){
+                if (this.searchText) {
                     this.searchInput();
                 }
             },
@@ -40,7 +40,6 @@ export class UnitsPage {
                 // This second anonymous method is called if there is some error with the observable
                 this.showError(error.message);
             });
-        );
     }
 
     // Handler for presses on the cancel button
@@ -50,7 +49,7 @@ export class UnitsPage {
         // This could be a web request to repopulate the list, or restore from storage for speed
     }
 
-     public searchUnitDataList(){
+    public searchUnitDataList() {
         this.unitsProvider.searchUnit(this.searchText).subscribe(
             (success) => {
                 console.log(this.items = success);
@@ -74,7 +73,7 @@ export class UnitsPage {
     // We don't actually use the contents of the event parameter in this one, but we could get the sample text from it rather than from
     public searchInput() {
         // Reset items back to all of the items
-        
+
         // If the value is an empty/whitespace string don't filter the items, there would be no point
         if (this.searchText && this.searchText.trim() != '') {
 
@@ -105,8 +104,7 @@ export class UnitsPage {
         );
     }
 
-    public showContent()
-    {
+    public showContent() {
         return !!this.items;
     }
 }

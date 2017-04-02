@@ -5,17 +5,16 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  
+
 </ion-header>
 <ion-content padding>
-  <button class="buttonRight" ion-button padding small color="dark" clear (click)="goToUser()">+ profile</button>
-  <ion-title id="uniTitle">Uni Help</ion-title>
-   <ion-searchbar id="searchBar"
-        [(ngModel)]="searchString" placeholder="Search" [showCancelButton]="false">
-   </ion-searchbar>
-   <button padding ion-button small color="light" (click)="searchUnits()">Units</button>
-   <button class="buttonRight" ion-button small color="light" (click)="searchCourses()">Courses</button>    
-     <ion-card id="reviewsCard">
-          <ion-title>Top Reviews</ion-title>
-     </ion-card>
+    <button class="buttonRight" ion-button padding small color="dark" clear (click)="goToUser()">+ profile</button>
+    <ion-title id="uniTitle">Uni Help</ion-title>
+    <ion-searchbar id="searchBar" [(ngModel)]="searchString" placeholder="Search" [showCancelButton]="false">
+    </ion-searchbar>
+    <button padding ion-button small color="light" (click)="searchUnits()">Units</button>
+    <button class="buttonRight" ion-button small color="light" (click)="searchCourses()">Courses</button>
+    <ion-card id="reviewsCard">
+        <ion-title>Top Reviews</ion-title>
+    </ion-card>
 </ion-content>
