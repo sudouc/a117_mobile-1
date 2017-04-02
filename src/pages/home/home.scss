@@ -1,5 +1,23 @@
 page-home {
-    .card {
-        height: 25%;
+    
+    .buttonRight {
+            float: right;
     }
+
+    #uniTitle {
+        text-align: center;
+        margin-top: 60px;
+    }
+
+    #searchBar {
+        margin-top: 70px;
+    }
+
+    #reviewsCard
+    {
+        margin-top: 50px;
+        height: 30%;
+    }
+
+
 }
