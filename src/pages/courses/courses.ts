@@ -17,6 +17,8 @@ export class CoursesPage {
     searchText: string = '';
     items: any[];
 
+    //searcParams: URLSearchParams = new URLSearchParams(this.searchText); //Might be useful later
+
     constructor(public navCtrl: NavController, public navParams: NavParams, public coursesProv: CoursesProvider,
         private alertCtrl: AlertController) { }
 
@@ -35,9 +37,21 @@ export class CoursesPage {
                 // the CourseProvider.getCourses method resolves with a list object for this
                 this.items = success;
             },
-           (error) => {
-                // This second anonymous method is called if there is some error with the observable, (Use if needed)
-           });
+            (error) => {
+                // This second anonymous method is called if there is some error with the observable
+                this.showError(error.message);
+            });
+    }
+
+    public searchCourseDataList() {
+        this.coursesProv.searchCourse(this.searchText).subscribe(
+            (success) => {
+                console.log(this.items = success);
+            },
+            (error) => {
+                this.showError(error);
+            }
+        )
 
     }
 
@@ -45,17 +59,20 @@ export class CoursesPage {
     public searchCancel(event: any) {
         // Reset this list of courses to default (the search bar is cleared automatically by ionic)
         // This could be a web request to repopulate the list, or restore from storage for speed
-        console.log('Search cancel!');
+        this.getCourseDataList();
+        console.log('Search cancelled.');
     }
 
     // Handler for the search bar input. Ionic debounces this for us (~250ms min between calls)
     // Though that can be changed https://ionicframework.com/docs/v2/api/components/searchbar/Searchbar/
     // We don't actually use the contents of the event parameter in this one, but we could get the sample text from it rather than from
     public searchInput(event: any) {
-        // TODO: actually fire off a search request and get results from that API
-
+        if (this.searchText && this.searchText.trim() != '') {
+            this.searchCourseDataList();
+        } else {
+            this.getCourseDataList();
+        }
         // TODO: Show a message if there were no items found
-        console.log('Search input!');
     }
 
     // Click callback when one of the items in the list is clicked on
@@ -71,9 +88,17 @@ export class CoursesPage {
         );
     }
 
-    public showContent()
-    {
+    public showContent() {
         return !!this.items;
+    }
+
+    public showError(text) {
+        let alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: text,
+            buttons: ['OK']
+        });
+        alert.present();
     }
 
 }
