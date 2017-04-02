@@ -21,6 +21,8 @@ import { CoursesProvider } from '../providers/courses-provider';
 import { HomePage } from '../pages/home/home';
 import { SearchProvider } from '../providers/search-provider';
 
+import { CommentsComponent } from '../components/comments/comments';
+
 @NgModule({
     declarations: [
         MyApp,
@@ -32,7 +34,8 @@ import { SearchProvider } from '../providers/search-provider';
         CurrentUserPage,
         UnitDetailsPage,
         CourseDetailsPage,
-        HomePage
+        HomePage,
+        CommentsComponent
     ],
     imports: [
         IonicModule.forRoot(MyApp)
