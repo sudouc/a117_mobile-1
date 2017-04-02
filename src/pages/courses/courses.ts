@@ -18,6 +18,8 @@ export class CoursesPage {
     searchParameter: string = '';
     items: any[];
 
+    //searcParams: URLSearchParams = new URLSearchParams(this.searchText); //Might be useful later
+
     constructor(public navCtrl: NavController, public navParams: NavParams, public coursesProv: CoursesProvider,
         private alertCtrl: AlertController) { this.searchText = navParams.get('searchParam'); }
 
@@ -39,9 +41,21 @@ export class CoursesPage {
                     this.searchInput();
                 }
             },
-           (error) => {
-                // This second anonymous method is called if there is some error with the observable, (Use if needed)
-           });
+            (error) => {
+                // This second anonymous method is called if there is some error with the observable
+                this.showError(error.message);
+            });
+    }
+
+    public searchCourseDataList() {
+        this.coursesProv.searchCourse(this.searchText).subscribe(
+            (success) => {
+                console.log(this.items = success);
+            },
+            (error) => {
+                this.showError(error);
+            }
+        )
 
     }
 
@@ -72,7 +86,6 @@ export class CoursesPage {
                         (item.unit_code.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
                 });
         }
-
         // TODO: Show a message if there were no items found
     }
 
@@ -89,9 +102,17 @@ export class CoursesPage {
         );
     }
 
-    public showContent()
-    {
+    public showContent() {
         return !!this.items;
+    }
+
+    public showError(text) {
+        let alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: text,
+            buttons: ['OK']
+        });
+        alert.present();
     }
 
 }
