@@ -80,7 +80,7 @@ export class UnitsProvider {
         return Observable.create(
             (observable) => {
                 // Make the HTTP request
-                this.http.get(ApiEndpoints.UNITS_SEARCH +'/' + searchString)
+                this.http.get(ApiEndpoints.SEARCH_UNIT +'/' + searchString)
                     .map((response) => response.json())
                     .subscribe(
                     (data) => {

@@ -14,15 +14,15 @@ import { CourseUnitsPage } from '../course-units/course-units';
     templateUrl: 'course-details.html',
 })
 export class CourseDetailsPage {
-    course: { name: string, course_code: string }; // It would be a good idea to more strongly type this
+    course: any; // It would be a good idea to more strongly type this
     courseString: string = "Testing display";
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private coursesProvider: CoursesProvider) { 
-            this.course =  {name: "", course_code: ""};
-        }
+        private coursesProvider: CoursesProvider) {
+        this.course = { name: "", course_code: "" };
+    }
 
     ionViewDidLoad() {
         // console.log('ionViewDidLoad CourseDetailsPage');
@@ -52,13 +52,14 @@ export class CourseDetailsPage {
         )
     }
 
-    courseUnitButtonClicked(){
+    courseUnitButtonClicked() {
         console.log("button was clicked!");
 
-            this.navCtrl.push(
+        this.navCtrl.push(
             CourseUnitsPage,
             // Provide the course id as a nav parameter
-            //{ id: item.id }
+            { id: this.course.id,
+            name: this.course.name}
         );
     }
 

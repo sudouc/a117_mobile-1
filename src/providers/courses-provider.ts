@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { Observable } from 'rxjs/Observable';
-import { ApiEndpoints, AppConstants } from '../app/constants';
+import { ApiEndpoints, AppConstants, ApiExtensions } from '../app/constants';
 
 /*
   Generated class for the CoursesProvider provider.
@@ -99,5 +99,11 @@ export class CoursesProvider {
                         observable.error(error);
                     })
             });
+    }
+
+        public getCourseUnits(id) {
+        //request all units
+        return this.http.get(ApiEndpoints.COURSES +'/'+ id + ApiExtensions.COURSEUNITS)
+                    .map((response) => response.json());
     }
 }

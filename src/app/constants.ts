@@ -36,4 +36,5 @@ export class ApiExtensions {
     // Use with units to create a url like:
     // /api/unit/{unit_id}/comment/{comment_id}
     public static COMMENTS = '/comments';
+    public static COURSEUNITS = '/units';
 }
