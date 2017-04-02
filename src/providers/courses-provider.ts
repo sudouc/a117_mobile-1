@@ -68,8 +68,7 @@ export class CoursesProvider {
                     },
                     (error) => {
                         observable.error(error);
-                    }
-                    )
+                    })
             }
         );
     }
@@ -91,14 +90,14 @@ export class CoursesProvider {
                     // Check the docs for more info
                     // http://reactivex.io/documentation/operators/subscribe.html
                     (data) => {
+                        console.log("Get course by id got data");
+                        console.log(data);
                         observable.next(data);
                         observable.complete();
-
                     },
                     (error) => {
                         observable.error(error);
                     })
             });
     }
-
 }

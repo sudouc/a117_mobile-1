@@ -53,14 +53,10 @@ export class CoursesPage {
             }
         )
     }
+           (error) => {
+                // This second anonymous method is called if there is some error with the observable, (Use if needed)
+           });
 
-    public showError(text) {
-        let alert = this.alertCtrl.create({
-            title: 'Error',
-            subTitle: text,
-            buttons: ['OK']
-        });
-        alert.present();
     }
 
     // Handler for presses on the cancel button
@@ -94,6 +90,11 @@ export class CoursesPage {
             // Provide the course id as a nav parameter
             { id: item.id }
         );
+    }
+
+    public showContent()
+    {
+        return !!this.items;
     }
 
 }

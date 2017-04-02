@@ -37,4 +37,44 @@ export class SearchProvider {
         }
     );
   }
+
+    public unitsSearch(input) {
+
+        return Observable.create(
+            (observable) => {
+                this.http.get(ApiEndpoints.UNITS_SEARCH + "/?=" + input)
+                    .map((response) => response.json())
+                    .subscribe(
+                    (data) => {
+                        console.log(data);
+                        observable.next();
+                        observable.complete();
+                    },
+                    (error) => {
+                        console.log(error);
+                        observable.error(error);
+                    })
+            }
+        );
+    }
+
+    public coursesSearch(input) {
+
+        return Observable.create(
+            (observable) => {
+                this.http.get(ApiEndpoints.COURSES_SEARCH + "/?=" + input)
+                    .map((response) => response.json())
+                    .subscribe(
+                    (data) => {
+                        console.log(data);
+                        observable.next();
+                        observable.complete();
+                    },
+                    (error) => {
+                        console.log(error);
+                        observable.error(error);
+                    })
+            }
+        );
+    }
 }
