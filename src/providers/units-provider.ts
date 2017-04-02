@@ -20,7 +20,6 @@ export class UnitsProvider {
 
     public getUnits() {
         //request all units
-
        return Observable.create(
             (observable) => {
                 // Make the HTTP request
