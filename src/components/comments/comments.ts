@@ -51,4 +51,8 @@ export class CommentsComponent {
     public showContent() {
         return !!this.comments;
     }
+
+    public showEmpty() {
+        return this.comments === [];
+    }
 }
