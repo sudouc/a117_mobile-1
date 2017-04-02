@@ -18,11 +18,31 @@ export class SearchProvider {
         console.log('Hello SearchProvider Provider');
     }
 
+    public getSearchResultAll(input) {
+
+        return Observable.create(
+            (observable) => {
+                this.http.get(ApiEndpoints.SEARCH_ALL + "?=" + input)
+                    .map((response) => response.json())
+                    .subscribe(
+                    (data) => {
+                        console.log(data);
+                        observable.next();
+                        observable.complete();
+                    },
+                    (error) => {
+                        console.log(error);
+                        observable.error(error);
+                    })
+            }
+        );
+    }
+
     public unitsSearch(input) {
 
         return Observable.create(
             (observable) => {
-                this.http.get(ApiEndpoints.UNITS_SEARCH + "/?=" + input)
+                this.http.get(ApiEndpoints.SEARCH_UNIT + "/?=" + input)
                     .map((response) => response.json())
                     .subscribe(
                     (data) => {
@@ -42,7 +62,7 @@ export class SearchProvider {
 
         return Observable.create(
             (observable) => {
-                this.http.get(ApiEndpoints.COURSES_SEARCH + "/?=" + input)
+                this.http.get(ApiEndpoints.SEARCH_COURSE + "/?=" + input)
                     .map((response) => response.json())
                     .subscribe(
                     (data) => {

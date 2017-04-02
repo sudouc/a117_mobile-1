@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UnitsProvider } from '../../providers/units-provider';
 import { RatingsPage } from '../ratings/ratings';
+import { RatingsProvider } from '../../providers/ratings-provider';
 
 /*
   Generated class for the UnitDetails page.
@@ -15,11 +16,13 @@ import { RatingsPage } from '../ratings/ratings';
 })
 export class UnitDetailsPage {
     unit: any; // It would be a good idea to more strongly type this
+    ratings: any[];
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private unitsProvider: UnitsProvider) { }
+        private unitsProvider: UnitsProvider,
+        private ratingsProvider: RatingsProvider) { }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad UnitDetailsPage');
@@ -28,6 +31,7 @@ export class UnitDetailsPage {
     ionViewWillEnter() {
         // Fetch the unit details
         this.getUnit();
+        this.getRatings();
         // TODO fetch comments + display them
     }
 
@@ -51,9 +55,23 @@ export class UnitDetailsPage {
         )
     }
 
-    goToRatings(){
+    goToRatings() {
         //TODO optionally optimize by sending only details required by RatingsPage
-        this.navCtrl.push(RatingsPage, {unit: this.unit});
+        this.navCtrl.push(RatingsPage, { unit: this.unit });
+    }
+
+    getRatings() {
+        let unit_id = this.navParams.get('unit_id');
+
+        this.ratingsProvider.getRatingsByUnitId(unit_id).subscribe(
+            (data) => {
+                console.log("ratings:" + data);
+                this.ratings = data;
+            },
+            (error) => {
+                this.ratings = error;
+            }
+        )
     }
 
     // TODO, fetch comments

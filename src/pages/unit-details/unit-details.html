@@ -67,6 +67,21 @@
     </ion-item>
   </ion-list>
 
+  <ion-card *ngFor="let rating of ratings">
+      <ion-card-header>
+        Rating ID: {{ rating.id }}
+      </ion-card-header>
+      <ion-card-content>
+        Difficulty: {{ rating.difficulty}}<br>
+        Satisfaction: {{ rating.satisfaction }}<br>
+        Engagement: {{ rating.engagement }}<br>
+        Assistance: {{ rating.assistance }}<br>
+        Practical: {{ rating.practical }}<br>
+        Created at: {{ rating.created_at }}<br>
+        Updated at: {{ rating.updated_at}}<br>
+      </ion-card-content>
+  </ion-card>
+
   <!--TODO: Comment Display-->
 
 </ion-content>
