@@ -18,7 +18,10 @@ export class UnitsPage {
     items: any[];
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private unitsProvider: UnitsProvider, private alertCtrl: AlertController) {
-        this.searchText = navParams.get('searchParam');
+        if (navParams.get('searchParam')){
+         this.searchText = navParams.get('searchParam');
+        }
+        
     }
 
     ionViewDidLoad() {

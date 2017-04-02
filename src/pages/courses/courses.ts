@@ -3,6 +3,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { CoursesProvider } from '../../providers/courses-provider'
 import { CourseDetailsPage } from '../course-details/course-details';
 
+
 /*
   Generated class for the Courses page.
 
@@ -22,11 +23,14 @@ export class CoursesPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public coursesProv: CoursesProvider,
         private alertCtrl: AlertController) {
+        if (navParams.get('searchParam')) {
             this.searchText = navParams.get('searchParam');
         }
 
+    }
+
     ionViewDidLoad() {
-        console.log('ionViewDidLoad CoursesPage' + this.searchText);
+        console.log('ionViewDidLoad CoursesPage  ||  ' + this.searchText);
 
         // Populate the list of items when this view loads
         this.getCourseDataList();
@@ -39,7 +43,7 @@ export class CoursesPage {
                 // 'success' is the return value of the observable,
                 // the CourseProvider.getCourses method resolves with a list object for this
                 this.items = success;
-                if (this.searchText){
+                if (this.searchText) {
                     this.searchInput();
                 }
             },
