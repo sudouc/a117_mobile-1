@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Unit Details</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Unit Details</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
@@ -67,6 +67,9 @@
     </ion-item>
   </ion-list>
 
+    <!--TODO: Comment Display-->
+    <comments [entity-type]="'unit'" [entity-id]="unit?.id">
+    </comments>
   <ion-card *ngFor="let rating of ratings">
       <ion-card-header>
         Rating ID: {{ rating.id }}

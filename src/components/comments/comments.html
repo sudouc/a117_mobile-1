@@ -1,0 +1,40 @@
+<!--
+  Generated template for the Comments component.
+
+  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+<ion-card *ngIf="error">
+    <ion-card-content>
+        {{error}}
+    </ion-card-content>
+</ion-card>
+
+<ion-card *ngIf="!showContent()">
+    <ion-card-content>
+        Loading...
+    </ion-card-content>
+</ion-card>
+
+<ion-card *ngIf="showEmpty()">
+    <ion-card-content>
+        No Comments Yet!
+    </ion-card-content>
+</ion-card>
+
+<button ion-button full (click)="addComment()">Add Comment</button>
+
+<ion-list *ngIf="showContent()">
+    <ion-item *ngFor="let comment of comments">
+        <!-- Only icon (no text) -->
+        <button ion-button icon-left outline>
+            <ion-icon name="thumbs-up"></ion-icon>
+            Like ({{comment.likes || 0}})
+        </button>
+        <ion-avatar item-left>
+            <img src="{{comment?.user_dp_url || 'http://baconmockup.com/100/100'}}">
+        </ion-avatar>
+        <h2>{{comment?.name || "Anonymous"}}</h2>
+        <h3>{{comment?.comment || "Anonymous"}}</h3>
+    </ion-item>
+</ion-list>

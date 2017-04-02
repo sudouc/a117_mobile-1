@@ -23,6 +23,8 @@ import { HomePage } from '../pages/home/home';
 import { SearchProvider } from '../providers/search-provider';
 import { RatingsPage } from '../pages/ratings/ratings';
 
+import { CommentsComponent } from '../components/comments/comments';
+
 @NgModule({
     declarations: [
         MyApp,
@@ -34,6 +36,7 @@ import { RatingsPage } from '../pages/ratings/ratings';
         CurrentUserPage,
         UnitDetailsPage,
         CourseDetailsPage,
+        CommentsComponent,
         HomePage,
         RatingsPage
     ],

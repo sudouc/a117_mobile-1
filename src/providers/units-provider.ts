@@ -112,4 +112,31 @@ export class UnitsProvider {
             }
         );
     }
+
+    // make a request for comments for a unit
+    public getCommentsForUnit(unit_id): Observable<any> {
+
+        return Observable.create(
+            (observable) => {
+                // Make the HTTP request
+                this.http.get(ApiEndpoints.UNITS + '/' + unit_id + ApiExtensions.COMMENTS)
+                    .map((response) => response.json())
+                    // map is just a function that gets applied no matter what comes back
+                    // in this case we use it to always convert the object to a json representation of the response body
+                    .subscribe(
+                    // To the subscribe method we pass several anonymous methods that are called
+                    // Under different circumstances (e.g. success, error)
+                    // Check the docs for more info
+                    // http://reactivex.io/documentation/operators/subscribe.html
+                    (data) => {
+                        observable.next(data);
+                        observable.complete();
+                    },
+                    (error) => {
+                        console.log(error);
+                        observable.error(error);
+                    })
+            }
+        );
+    }
 }
