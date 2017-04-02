@@ -18,7 +18,7 @@ export class UnitsProvider {
     oauth: any = null;
     submitted: boolean = false;
     ratingData: any;
-    
+
     constructor(public http: Http, private auth: AuthService) {
         console.log('Hello UnitsProvider Provider');
     }
@@ -79,58 +79,16 @@ export class UnitsProvider {
         );
     }
 
-//  public requestUser(): Observable<Response> {
+    public setRating(unit_id, rating): Observable<any> {
 
-//         let options = new RequestOptions({ headers: this.getHeaders() });
-//         let userRequest = this.http.get(ApiEndpoints.USER, options);
-
-//         userRequest.subscribe(
-//             (data) => {
-//                 this.currentUser = data.json();
-//             }
-//         )
-
-//         return userRequest;
-//     }
-
-    public setRating(unit_id, rating):  Observable<boolean> {
+        if (!this.auth.isLoggedIn()) {
+            throw Error("Can't do that if you're not logged in! (Submit a rating)");
+        }
 
         let options = new RequestOptions({ headers: this.auth.getHeaders() });
-        let body = {
-                    "difficult": rating.difficult,
-                    "satisfaction": rating.satisfication,
-                    "engagement": rating.engagement,
-                    "assistance": rating.enjoyment,//TODO change to assistance here and in RatingsPage
-                    "practicality": rating.practicality
-                };
-        // let ratingCreate = this.http.post(ApiEndpoints.UNITS + '/' + 23 + ApiExtensions.RATING_ADD, body, options);
 
-        return Observable.create(
-            (observer) => {
-                this.http.post(ApiEndpoints.UNITS + '/' + 23 + ApiExtensions.RATING_ADD, options, body).subscribe(
-                    (success) => {
-                        // In the request success re notify our subscriber that the request succeeded
-                        observer.next(true);
-                        observer.complete();
-                    },
-                    (error) => {
-                        // Give the error to the subscriber to deal with
-                        console.log(error.json());
-                        observer.error(error.json());
-                    }
-                )
-            });
-        // ratingCreate.subscribe(              
-        //             (data) => {
-        //                 console.log(data.json());
-        //                 this.ratingData = data.json();
-        //             }
-        //             // ,
-        //             // (error) => {
-        //             //     console.error(error.json());
-        //             // }
-        //         )
-        // return ratingCreate;
+        return this.http.post(ApiEndpoints.UNITS + '/' + unit_id + ApiExtensions.RATING_ADD, rating, options)
+            .map(response => response.json());
     }
 
 }
