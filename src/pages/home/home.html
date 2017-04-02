@@ -5,34 +5,17 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-
-  <ion-toolbar>
-    <ion-searchbar
-        [(ngModel)]="searchString" placeholder="Search Everything e.g. Course, Unit" [showCancelButton]="true" (ionInput)="searchInput($event)">
-        </ion-searchbar>
-  </ion-toolbar>
-</ion-header>
- <ion-list>
-        <button ion-item *ngFor="let item of placeholderItems" (click)="itemSelected(item)">
-            {{ item.name }}
-        </button>
-    </ion-list>
--->
-<ion-header>
-  <ion-title text-center position:absolute>Uni Help</ion-title><ion-label position:absolute text-right padding (click)="searchUnits()">+ profile</ion-label>
+  
 </ion-header>
 <ion-content padding>
-   <ion-searchbar
+  <button class="buttonRight" ion-button padding small color="dark" clear (click)="searchUnits()">+ profile</button>
+  <ion-title id="uniTitle">Uni Help</ion-title>
+   <ion-searchbar id="searchBar"
         [(ngModel)]="searchString" placeholder="Search" [showCancelButton]="false">
    </ion-searchbar>
    <button padding ion-button small color="light" (click)="searchUnits()">Units</button>
-   <button padding  align:right ion-button small color="light" (click)="searchCourses()">Courses</button>    
-     <ion-card>
+   <button class="buttonRight" ion-button small color="light" (click)="searchCourses()">Courses</button>    
+     <ion-card id="reviewsCard">
           <ion-title>Top Reviews</ion-title>
-
      </ion-card>
 </ion-content>
