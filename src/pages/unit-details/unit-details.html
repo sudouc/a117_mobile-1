@@ -6,63 +6,65 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Unit Details</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Unit Details</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <!--TODO: Format nicely-->
-  <ion-list>
-    <ion-item>
-      ID: {{unit?.id || "Not Found" }}
-    </ion-item>
-    <ion-item>
-      Name: {{unit?.name || "Not Found"}}
-    </ion-item>
-    <ion-item>
-      UOO ID: {{unit?.uoo_id || "Not Found"}}
-    </ion-item>
-    <ion-item>
-      Code: {{unit?.unit_code || "Not Found"}}
-    </ion-item>
-    <ion-item>
-      Version: {{unit?.unit_version || "Not Found"}}
-    </ion-item>
-    <ion-item>
-      Level: {{unit?.unit_level || "Not Found"}}
-    </ion-item>
-    <ion-item>
-      Description: {{unit?.unit_description || "Not Found"}}
-    </ion-item>
-    <ion-item>
-      URL: {{unit?.unit_url || "Not Found"}}
-    </ion-item>
-    <ion-item>
-      Faculty: {{unit?.faculty || "Not Found"}}
-    </ion-item>
-    <ion-item>
-      Credit Points: {{unit?.credit_points || "Not Found"}}
-    </ion-item>
-    <ion-item>
-      Year: {{unit?.year || "Not Found"}}
-    </ion-item>
-    <ion-item>
-      Period: {{unit?.period || "Not Found"}}
-    </ion-item>
-    <ion-item>
-      Created: {{unit?.created_at || "Not Found"}}
-    </ion-item>
-    <ion-item>
-      Updated: {{unit?.updated_at || "Not Found"}}
-    </ion-item>
-    <ion-item *ngIf="unit?.deleted_at">
-      Deleted: {{unit?.deleted_at}}
-    </ion-item>
-  </ion-list>
+    <!--TODO: Format nicely-->
+    <ion-list>
+        <ion-item>
+            ID: {{unit?.id || "Not Found" }}
+        </ion-item>
+        <ion-item>
+            Name: {{unit?.name || "Not Found"}}
+        </ion-item>
+        <ion-item>
+            UOO ID: {{unit?.uoo_id || "Not Found"}}
+        </ion-item>
+        <ion-item>
+            Code: {{unit?.unit_code || "Not Found"}}
+        </ion-item>
+        <ion-item>
+            Version: {{unit?.unit_version || "Not Found"}}
+        </ion-item>
+        <ion-item>
+            Level: {{unit?.unit_level || "Not Found"}}
+        </ion-item>
+        <ion-item>
+            Description: {{unit?.unit_description || "Not Found"}}
+        </ion-item>
+        <ion-item>
+            URL: {{unit?.unit_url || "Not Found"}}
+        </ion-item>
+        <ion-item>
+            Faculty: {{unit?.faculty || "Not Found"}}
+        </ion-item>
+        <ion-item>
+            Credit Points: {{unit?.credit_points || "Not Found"}}
+        </ion-item>
+        <ion-item>
+            Year: {{unit?.year || "Not Found"}}
+        </ion-item>
+        <ion-item>
+            Period: {{unit?.period || "Not Found"}}
+        </ion-item>
+        <ion-item>
+            Created: {{unit?.created_at || "Not Found"}}
+        </ion-item>
+        <ion-item>
+            Updated: {{unit?.updated_at || "Not Found"}}
+        </ion-item>
+        <ion-item *ngIf="unit?.deleted_at">
+            Deleted: {{unit?.deleted_at}}
+        </ion-item>
+    </ion-list>
 
-  <!--TODO: Comment Display-->
+    <!--TODO: Comment Display-->
+    <comments [entity-type]="'unit'" [entity-id]="unit?.id">
+    </comments>
 
 </ion-content>
