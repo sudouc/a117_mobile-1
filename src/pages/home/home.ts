@@ -69,6 +69,13 @@ export class HomePage {
     });
   }
 
+  public goToUser()
+  {
+     this.navCtrl.push(CurrentUserPage, {
+      
+    });
+  }
+
   public selectReviews()
   {
 
