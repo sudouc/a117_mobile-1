@@ -43,7 +43,7 @@ export class CoursesPage {
             });
     }
 
-    public searchCourseDataList(){
+    public searchCourseDataList() {
         this.coursesProv.searchCourse(this.searchText).subscribe(
             (success) => {
                 console.log(this.items = success);
@@ -52,10 +52,6 @@ export class CoursesPage {
                 this.showError(error);
             }
         )
-    }
-           (error) => {
-                // This second anonymous method is called if there is some error with the observable, (Use if needed)
-           });
 
     }
 
@@ -71,9 +67,9 @@ export class CoursesPage {
     // Though that can be changed https://ionicframework.com/docs/v2/api/components/searchbar/Searchbar/
     // We don't actually use the contents of the event parameter in this one, but we could get the sample text from it rather than from
     public searchInput(event: any) {
-        if(this.searchText && this.searchText.trim() != ''){
+        if (this.searchText && this.searchText.trim() != '') {
             this.searchCourseDataList();
-        } else{
+        } else {
             this.getCourseDataList();
         }
         // TODO: Show a message if there were no items found
@@ -92,9 +88,17 @@ export class CoursesPage {
         );
     }
 
-    public showContent()
-    {
+    public showContent() {
         return !!this.items;
+    }
+
+    public showError(text) {
+        let alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: text,
+            buttons: ['OK']
+        });
+        alert.present();
     }
 
 }
