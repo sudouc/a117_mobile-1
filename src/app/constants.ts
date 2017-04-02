@@ -28,6 +28,7 @@ export class ApiEndpoints {
     // SEARCH (Will change to use url params for search term)
     public static COURSES_SEARCH = ApiEndpoints.API + '/search/courses';
     public static UNITS_SEARCH = ApiEndpoints.API + '/search/units';
+
 }
 
 export class ApiExtensions {
@@ -35,4 +36,7 @@ export class ApiExtensions {
     // Use with units to create a url like:
     // /api/unit/{unit_id}/comment/{comment_id}
     public static COMMENTS = '/comments';
+
+        //RATINGS
+    public static RATING_ADD = '/ratings';
 }
