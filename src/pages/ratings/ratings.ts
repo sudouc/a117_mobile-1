@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 /*
   Generated class for the Ratings page.
 
@@ -7,86 +7,61 @@ import { NavController, NavParams } from 'ionic-angular';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-ratings',
-  templateUrl: 'ratings.html'
+    selector: 'page-ratings',
+    templateUrl: 'ratings.html'
 })
 export class RatingsPage {
 
     unit: any;
-    difficulty: number = 50;
-    engagement: number = 50;
-    satisfaction: number = 50;
-    enjoyment: number = 50;
-    practicality: number = 50;
+    ratings = {
+        difficulty: 50,
+        engagement: 50,
+        satisfaction: 50,
+        enjoyment: 50,
+        practicality: 50
+    }
     count: number = 0;
-    changed: any;
+    changed: Set<string> = new Set();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.changed = {difficult: 0, engage: 0, satisfy: 0, enjoy: 0, practical: 0};
-  }
+    constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) { }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RatingsPage');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad RatingsPage');
+    }
 
-  ionViewWillEnter() {
-    // Fetch the unit details
-    this.unit = this.navParams.get('unit');
-    console.log(this.unit);
-    // TODO fetch comments + display them
-  }
+    ionViewWillEnter() {
+        // Fetch the unit details
+        this.unit = this.navParams.get('unit');
+        console.log(this.unit);
+        // TODO fetch comments + display them
+    }
 
-  onChange(changedArea){
+    onChange(changedArea) {
+        this.changed.add(changedArea);
+    }
 
-    if(changedArea == 'difficult'){
-        if(this.changed.difficult == 0){
-            this.changed.difficult ++;
+    submit() {
+        if (this.changed.size == 5) {
+            console.log("You have submitted your ratings:\n" +
+                "Difficulty: " + this.ratings.difficulty + "\n" +
+                "Engagement: " + this.ratings.engagement + "\n" +
+                "Satisfaction: " + this.ratings.satisfaction + "\n" +
+                "Enjoyment: " + this.ratings.enjoyment + "\n" +
+                "Practicality: " + this.ratings.practicality + "\n");
+            //send to api
         }
-        console.log(this.difficulty);
-    }
-    else if(changedArea == "engage"){
-        if(this.changed.engage == 0){
-            this.changed.engage ++;
+        else {
+            this.presentIncompleteSubmissionAlert();
         }
-        console.log(this.engagement);
     }
-    else if(changedArea == 'satisfy'){
-        if(this.changed.satisfy == 0){
-            this.changed.satisfy ++;
-        }
-        console.log(this.satisfaction);
-    }
-    else if(changedArea == "enjoy"){
-        if(this.changed.enjoy == 0){
-            this.changed.enjoy ++;
-        }
-        console.log(this.enjoyment);
-    }
-    else if(changedArea == "practical"){
-        if(this.changed.practical == 0){
-            this.changed.practical ++;
-        }
-        console.log(this.practicality);
-    }
-    this.count = this.changed.difficult + this.changed.engage +
-    this.changed.satisfy + this.changed.enjoy + this.changed.practical;
-  }
 
-  submit(){
-    if(this.count == 5){
-        console.log("You have submitted your ratings:\n" +
-        "Difficulty: " + this.difficulty + "\n" +
-        "Engagement: " + this.engagement + "\n" +
-        "Satisfaction: " + this.satisfaction + "\n" +
-        "Enjoyment: " + this.enjoyment + "\n" +
-        "Practicality: " + this.practicality + "\n");
-        //send to api
+    presentIncompleteSubmissionAlert() {
+        let alert = this.alertCtrl.create({
+            title: 'Incomplete',
+            subTitle: "You must submit a rating for all areas to make your rating count. Perhaps you didn't edit all sliders?",
+            buttons: ['Dismiss']
+        });
+        alert.present();
     }
-    else {
-        console.log("You must submit a rating for all areas to make your rating count.");
-    }
-    console.log(this.changed.difficult, this.changed.engage, this.changed.satisfy, this.changed.enjoy, this.changed.practical);
-  }
-
 
 }

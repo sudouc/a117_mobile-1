@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Your Rating: {{unit?.name}}</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Your Rating: {{unit?.name}}</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
@@ -18,36 +18,35 @@
         <ion-item>
             <!--TODO improve headings display-->
             <ion-label>Difficulty</ion-label>
-            <ion-range step="2" [(ngModel)]="difficulty" (ionChange)="onChange('difficult');">
+            <ion-range step="2" [(ngModel)]="ratings.difficulty" (ionChange)="onChange('difficult');">
                 <ion-icon small range-left name="sunny"></ion-icon>
                 <ion-icon range-right name="sunny"></ion-icon>
             </ion-range>
         </ion-item>
         <ion-item>
             <ion-label>Engagement</ion-label>
-            <ion-range step="2" [(ngModel)]="engagement" (ionChange)="onChange('engage');">
+            <ion-range step="2" [(ngModel)]="ratings.engagement" (ionChange)="onChange('engage');">
                 <ion-icon small range-left name="sunny"></ion-icon>
                 <ion-icon range-right name="sunny"></ion-icon>
             </ion-range>
         </ion-item>
         <ion-item>
             <ion-label>Satisfaction</ion-label>
-            <ion-range step="2" [(ngModel)]="satisfaction" (ionChange)="onChange('satisfy', 1);">
+            <ion-range step="2" [(ngModel)]="ratings.satisfaction" (ionChange)="onChange('satisfy', 1);">
                 <ion-icon small range-left name="sunny"></ion-icon>
                 <ion-icon range-right name="sunny"></ion-icon>
             </ion-range>
         </ion-item>
         <ion-item>
             <ion-label>Enjoyment</ion-label>
-            <ion-range step="2" [(ngModel)]="enjoyment" (ionChange)="onChange('enjoy', 1);" >
+            <ion-range step="2" [(ngModel)]="ratings.enjoyment" (ionChange)="onChange('enjoy', 1);">
                 <ion-icon small range-left name="sunny"></ion-icon>
                 <ion-icon range-right name="sunny"></ion-icon>
             </ion-range>
         </ion-item>
         <ion-item>
             <ion-label>Practicality</ion-label>
-            <ion-range step="2" [(ngModel)]="practicality" step="10" 
-            snaps="true" (ionChange)="onChange('practical');">
+            <ion-range step="2" [(ngModel)]="ratings.practicality" step="10" snaps="true" (ionChange)="onChange('practical');">
                 <ion-icon small range-left name="sunny"></ion-icon>
                 <ion-icon range-right name="sunny"></ion-icon>
             </ion-range>
