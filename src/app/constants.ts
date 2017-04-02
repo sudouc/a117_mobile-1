@@ -35,4 +35,8 @@ export class ApiExtensions {
     // Use with units to create a url like:
     // /api/unit/{unit_id}/comment/{comment_id}
     public static COMMENTS = '/comments';
+
+    // RATINGS
+    // /api/unit/{unit_id}/ratings/{rating_id}
+    public static RATINGS = '/ratings';
 }
