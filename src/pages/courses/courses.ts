@@ -43,9 +43,6 @@ export class CoursesPage {
                 // 'success' is the return value of the observable,
                 // the CourseProvider.getCourses method resolves with a list object for this
                 this.items = success;
-                if (this.searchText) {
-                    this.searchInput();
-                }
             },
             (error) => {
                 // This second anonymous method is called if there is some error with the observable
@@ -64,7 +61,7 @@ export class CoursesPage {
         )
     }
 
-    }
+    
 
     // Handler for presses on the cancel button
     public searchCancel(event: any) {
