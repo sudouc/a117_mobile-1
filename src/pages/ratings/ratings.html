@@ -39,14 +39,14 @@
         </ion-item>
         <ion-item>
             <ion-label>Enjoyment</ion-label>
-            <ion-range step="2" [(ngModel)]="ratings.enjoyment" (ionChange)="onChange('enjoy', 1);">
+            <ion-range step="2" [(ngModel)]="ratings.assistance" (ionChange)="onChange('enjoy', 1);">
                 <ion-icon small range-left name="sunny"></ion-icon>
                 <ion-icon range-right name="sunny"></ion-icon>
             </ion-range>
         </ion-item>
         <ion-item>
             <ion-label>Practicality</ion-label>
-            <ion-range step="2" [(ngModel)]="ratings.practicality" step="10" snaps="true" (ionChange)="onChange('practical');">
+            <ion-range step="2" [(ngModel)]="ratings.practical" step="10" snaps="true" (ionChange)="onChange('practical');">
                 <ion-icon small range-left name="sunny"></ion-icon>
                 <ion-icon range-right name="sunny"></ion-icon>
             </ion-range>

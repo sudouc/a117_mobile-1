@@ -23,8 +23,8 @@ export class RatingsPage {
         difficulty: 50,
         engagement: 50,
         satisfaction: 50,
-        enjoyment: 50,
-        practicality: 50
+        assistance: 50,
+        practical: 50
     }
     count: number = 0;
     changed: Set<string> = new Set();
