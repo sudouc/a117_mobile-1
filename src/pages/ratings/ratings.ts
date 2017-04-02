@@ -4,7 +4,7 @@ import { UnitsProvider } from '../../providers/units-provider';
 
 import { UnitsPage } from '../units/units';
 import { AuthService } from '../../providers/auth-service';
-import { LoginPage } from '../login/login'; 
+import { LoginPage } from '../login/login';
 
 /*
   Generated class for the Ratings page.
@@ -28,10 +28,9 @@ export class RatingsPage {
     }
     count: number = 0;
     changed: Set<string> = new Set();
-    id: number = 0;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
-    private unitsProvider: UnitsProvider, private auth: AuthService) { }
+        private unitsProvider: UnitsProvider, private auth: AuthService) { }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad RatingsPage');
@@ -57,7 +56,7 @@ export class RatingsPage {
         alert.present();
     }
 
-     presentConfirmationAlert() {
+    presentConfirmationAlert() {
         let alert = this.alertCtrl.create({
             title: 'Your Rating Has Been Counted',
             subTitle: "Feel free to submit as many ratings as you like ;)",
@@ -74,8 +73,6 @@ export class RatingsPage {
                 "Satisfaction: " + this.ratings.satisfaction + "\n" +
                 "Enjoyment: " + this.ratings.enjoyment + "\n" +
                 "Practicality: " + this.ratings.practicality + "\n");
-            this.id = this.unit.id;
-            console.log(this.id);
             this.submit();
         }
         else {
@@ -85,41 +82,17 @@ export class RatingsPage {
 
     public submit() {
         // if (this.auth.isLoggedIn()){   // If we don't have a stored user object, fire off a request
-            this.unitsProvider.setRating(this.id, this.ratings).subscribe(
+        this.unitsProvider.setRating(this.unit.id, this.ratings).subscribe(
             (success) => {
-                if (success) {
-                    
-                    console.log(success);
-                    // We may want to do the login here and log straight in
-                    // Currently we just return them to the login screen
-                } else {
-                   console.log("not successful");
-                }
+                console.log("Successful rating submission");
+                console.log(success);
+                // We may want to do the login here and log straight in
+                // Currently we just return them to the login screen
             },
             // Error completing Observable anonymous function
             (error) => {
                 console.log("submit " + error);
             });
-            
-        // }
-        // else{
-        //     this.navCtrl.push(LoginPage);
 
-        // }
     }
-        // this.unitsProvider.setRating(this.id, this.ratings).subscribe(
-        //     (success) => {
-        //         // 'success' is the return value of the observable, the AuthService.login method resolves true for this, but if success is being called we don't really care about the value, we're just going to switch to the CurrentUserPage
-        //         // this.loading.dismiss();
-        //         // TODO: Root may change depending on where we got to the login page from (use a separate statement with a switch?)
-        //         this.presentConfirmationAlert();
-        //         this.navCtrl.setRoot(UnitsPage);
-        //     },
-        //     (error) => {
-        //         // This second anonymous method is called if there is some error with the observable
-        //         console.log("add rating" + error);
-        //     });
-
-    
-
 }
