@@ -21,7 +21,9 @@ export class CoursesPage {
     //searcParams: URLSearchParams = new URLSearchParams(this.searchText); //Might be useful later
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public coursesProv: CoursesProvider,
-        private alertCtrl: AlertController) { this.searchText = navParams.get('searchParam'); }
+        private alertCtrl: AlertController) {
+            this.searchText = navParams.get('searchParam');
+        }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad CoursesPage' + this.searchText);
@@ -72,7 +74,7 @@ export class CoursesPage {
     // We don't actually use the contents of the event parameter in this one, but we could get the sample text from it rather than from
     public searchInput() {
         // Reset items back to all of the items
-        
+
         // If the value is an empty/whitespace string don't filter the items, there would be no point
         if (this.searchText && this.searchText.trim() != '') {
 
@@ -83,7 +85,7 @@ export class CoursesPage {
                 (item) => {
                     return (item.name.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1)
                         || // Code or name. In reality we'll let the api handle this
-                        (item.unit_code.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
+                        (item.course_code.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
                 });
         }
         // TODO: Show a message if there were no items found
