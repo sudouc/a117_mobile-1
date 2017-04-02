@@ -34,19 +34,6 @@ export class HomePage {
           {id:3,name:"whatever"}];
   }
 
-  /*Search*/
-  public searchInput(event: any){
-    this.getPlaceholderItems();
-
-    if (this.searchString && this.searchString.trim() != ''){
-
-        this.placeholderItems = this.placeholderItems.filter(
-            (item) => {
-                return (item.name.toLowerCase().indexOf(this.searchString.toLowerCase()) > -1);
-            })
-    }
-  }
-
   public searchCancel(){
       this.getPlaceholderItems();
   }
@@ -56,14 +43,14 @@ export class HomePage {
   }
 
   public searchUnits()
-  {   
+  {
     this.navCtrl.push(UnitsPage, {
       searchParam: this.searchString
     });
   }
 
   public searchCourses()
-  {   
+  {
     this.navCtrl.push(CoursesPage, {
       searchParam: this.searchString
     });
@@ -72,7 +59,7 @@ export class HomePage {
   public goToUser()
   {
      this.navCtrl.push(CurrentUserPage, {
-      
+
     });
   }
 
