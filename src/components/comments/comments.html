@@ -4,8 +4,19 @@
   See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
   for more info on Angular 2 Components.
 -->
+<ion-card *ngIf="error">
+    <ion-card-content>
+        {{error}}
+    </ion-card-content>
+</ion-card>
 
-<ion-list>
+<ion-card *ngIf="!showContent()">
+    <ion-card-content>
+        Loading...
+    </ion-card-content>
+</ion-card>
+
+<ion-list *ngIf="showContent()">
     <ion-item *ngFor="let comment of comments">
         <!-- Only icon (no text) -->
         <button ion-button icon-left outline>

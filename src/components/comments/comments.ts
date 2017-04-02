@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { UnitsProvider } from '../../providers/units-provider';
 
 /*
   Generated class for the Comments component.
@@ -15,28 +16,39 @@ export class CommentsComponent {
     @Input('entity-type') entity_type: string;  // The type of entity (e.g. course, unit) used to select which provider to use
     @Input('entity-id') entity_id: string;    // The ID of the entity (used when getting stuff from the provider)
 
-    comments: any[] = [{
-        title: "A Title",
-        name: "User Name",
-        text: "Comment text",
-        user_dp_url: "http://placehold.it/100x100",
-        likes: 20
-    },
-    {
-        title: "A Title",
-        name: "User Name",
-        text: "Comment text",
-        user_dp_url: "http://placehold.it/100x100"
-    },
-    {
-        title: "A Title",
-        name: "User Name",
-        text: "Comment text",
-        user_dp_url: "http://placehold.it/100x100"
-    }];
+    error: any;
+    comments: any[];
 
-    constructor() {
+    constructor(private unitsProvider: UnitsProvider) {
         console.log('Hello Comments Component');
     }
 
+    ngOnChanges(changes: SimpleChanges) {
+        console.log(changes);
+        // Changes contains the old and the new values of both inputs, we don't actually care though
+        if (this.entity_type == 'unit' && this.entity_id) {
+            console.log("getting comments!");
+            this.unitsProvider.getCommentsForUnit(this.entity_id).subscribe(
+                data => {
+                    this.comments = data;
+                    console.log("got comments!");
+                    console.log(data);
+                },
+                error => {
+                    console.log(error);
+                    this.error = error;
+                }
+            )
+        }
+        else if (!this.entity_type || !this.entity_id) {
+            // no op
+        }
+        else {
+            throw new Error('ERROR: unsupported entity type "' + this.entity_type + '" given to comments component');
+        }
+    }
+
+    public showContent() {
+        return !!this.comments;
+    }
 }
