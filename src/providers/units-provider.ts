@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { Observable } from 'rxjs/Observable';
-import { ApiEndpoints } from '../app/constants';
+import { ApiEndpoints, AppConstants, ApiExtensions } from '../app/constants';
+import { AuthService } from '../../src/providers/auth-service';
 
 /*
   Generated class for the UnitsProvider provider.
@@ -14,7 +15,11 @@ import { ApiEndpoints } from '../app/constants';
 @Injectable()
 export class UnitsProvider {
 
-    constructor(public http: Http) {
+    oauth: any = null;
+    submitted: boolean = false;
+    ratingData: any;
+
+    constructor(public http: Http, private auth: AuthService) {
         console.log('Hello UnitsProvider Provider');
     }
 
@@ -73,6 +78,19 @@ export class UnitsProvider {
             }
         );
     }
+
+    public setRating(unit_id, rating): Observable<any> {
+
+        if (!this.auth.isLoggedIn()) {
+            throw Error("Can't do that if you're not logged in! (Submit a rating)");
+        }
+
+        let options = new RequestOptions({ headers: this.auth.getHeaders() });
+
+        return this.http.post(ApiEndpoints.UNITS + '/' + unit_id + ApiExtensions.RATINGS, rating, options)
+            .map(response => response.json());
+    }
+
 
     // Search for units
     public searchUnit(searchString) {

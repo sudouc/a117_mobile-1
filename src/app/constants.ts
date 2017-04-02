@@ -11,7 +11,8 @@ export class ApiEndpoints {
     // USER
     public static OAUTH_TOKEN = AppConstants.API_DOMAIN + '/oauth/token';
     public static API = AppConstants.API_DOMAIN + '/api';
-    public static USER = ApiEndpoints.API + '/user';
+    public static USER = ApiEndpoints.API + '/users';
+    public static USER_ME = ApiEndpoints.USER + '/@me';
     public static USER_CREATE = ApiEndpoints.USER + '/create';
 
     // UNITS
