@@ -73,4 +73,25 @@ export class UnitsProvider {
             }
         );
     }
+
+    // Search for units
+    public searchUnit(searchString) {
+        // Encapsulating the whole request in an observable means we avoid race conditions with two subscribers (one in this service and in the subscriber)
+        return Observable.create(
+            (observable) => {
+                // Make the HTTP request
+                this.http.get(ApiEndpoints.SEARCH_UNIT + '/' + searchString)
+                    .map((response) => response.json())
+                    .subscribe(
+                    (data) => {
+                        observable.next(data);
+                        observable.complete();
+                    },
+                    (error) => {
+                        observable.error(error);
+                    }
+                    )
+            }
+        );
+    }
 }

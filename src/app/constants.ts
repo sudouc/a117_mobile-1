@@ -26,8 +26,9 @@ export class ApiEndpoints {
     public static FACULTIES = ApiEndpoints.API + '/faculties';
 
     // SEARCH (Will change to use url params for search term)
-    public static COURSES_SEARCH = ApiEndpoints.API + '/search/courses';
-    public static UNITS_SEARCH = ApiEndpoints.API + '/search/units';
+    public static SEARCH_ALL = ApiEndpoints.API + '/search';
+    public static SEARCH_COURSE = ApiEndpoints.SEARCH_ALL + '/courses';
+    public static SEARCH_UNIT = ApiEndpoints.SEARCH_ALL + '/units';
 }
 
 export class ApiExtensions {

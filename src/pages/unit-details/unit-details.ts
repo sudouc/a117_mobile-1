@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UnitsProvider } from '../../providers/units-provider';
+import { RatingsPage } from '../ratings/ratings';
 import { RatingsProvider } from '../../providers/ratings-provider';
 
 /*
@@ -15,7 +16,7 @@ import { RatingsProvider } from '../../providers/ratings-provider';
 })
 export class UnitDetailsPage {
     unit: any; // It would be a good idea to more strongly type this
-    ratings: JSON[];
+    ratings: any[];
 
     constructor(
         public navCtrl: NavController,
@@ -54,12 +55,17 @@ export class UnitDetailsPage {
         )
     }
 
-    getRatings(){
+    goToRatings() {
+        //TODO optionally optimize by sending only details required by RatingsPage
+        this.navCtrl.push(RatingsPage, { unit: this.unit });
+    }
+
+    getRatings() {
         let unit_id = this.navParams.get('unit_id');
 
         this.ratingsProvider.getRatingsByUnitId(unit_id).subscribe(
             (data) => {
-                console.log("ratings:"+data);
+                console.log("ratings:" + data);
                 this.ratings = data;
             },
             (error) => {
