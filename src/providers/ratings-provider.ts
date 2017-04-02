@@ -17,10 +17,10 @@ export class RatingsProvider {
     console.log('Hello RatingsProvider Provider');
   }
 
-  public getRatings(){
+  public getRatingsByUnitId(unit_id){
       return Observable.create(
           (observable) => {
-              this.http.get(ApiEndpoints.UNITS + ApiExtensions.RATINGS) // Http GET request
+              this.http.get(ApiEndpoints.UNITS + '/' + unit_id + ApiExtensions.RATINGS) // Http GET request
               .map(response => response.json()) // Convert to a JSON object
               .subscribe(
                   (data) => {
@@ -39,7 +39,7 @@ export class RatingsProvider {
   public getRatingsById(id){
     return Observable.create(
         (observable) => {
-            this.http.get(ApiEndpoints.UNITS + ApiExtensions.RATINGS + '/' + id)
+            this.http.get(ApiEndpoints.UNITS + ApiExtensions.RATINGS + '/' + id) //This probably needs fixing/tweaking
             .map(response => response.json())
             .subscribe(
                 (data) => {

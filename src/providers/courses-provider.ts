@@ -39,6 +39,7 @@ export class CoursesProvider {
                         observable.complete();
                     },
                     (error) => {
+                        console.log(error);
                         observable.error(error);
                     })
             }

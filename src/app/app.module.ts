@@ -14,6 +14,7 @@ import { CurrentUserPage } from '../pages/currentuser/currentuser';
 
 import { UnitDetailsPage } from '../pages/unit-details/unit-details';
 import { UnitsProvider } from '../providers/units-provider';
+import { RatingsProvider } from '../providers/ratings-provider';
 
 import { CourseDetailsPage } from '../pages/course-details/course-details';
 import { CoursesProvider } from '../providers/courses-provider';
@@ -55,7 +56,8 @@ import { SearchProvider } from '../providers/search-provider';
         AuthService,
         UnitsProvider,
         CoursesProvider,
-        SearchProvider
+        SearchProvider,
+        RatingsProvider
     ]
 })
 export class AppModule { }
