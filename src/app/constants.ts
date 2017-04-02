@@ -5,17 +5,34 @@ export class AppConstants {
     public static GRANT_TYPE = 'password';
     public static CLIENT_SECRET = 'Gt3PKGqmzkrQLGruX61XFaJqd6jl1MdQyRigSMYB';
     public static SCOPE = '';
-    public static ALL = "all";
 }
 
 export class ApiEndpoints {
+    // USER
     public static OAUTH_TOKEN = AppConstants.API_DOMAIN + '/oauth/token';
     public static API = AppConstants.API_DOMAIN + '/api';
     public static USER = ApiEndpoints.API + '/user';
     public static USER_CREATE = ApiEndpoints.USER + '/create';
+
+    // UNITS
+    // To get an individual unit append id
     public static UNITS = ApiEndpoints.API + '/units';
-    public static UNITS_ALL = ApiEndpoints.UNITS + '/all';
+
+    // COURSES
+    // To get an individual course append id
     public static COURSES = ApiEndpoints.API + '/courses';
+
+    // FACULTIES
     public static FACULTIES = ApiEndpoints.API + '/faculties';
-    public static SEARCH = ApiEndpoints.API + '/search';
+
+    // SEARCH (Will change to use url params for search term)
+    public static COURSES_SEARCH = ApiEndpoints.API + '/search/courses';
+    public static UNITS_SEARCH = ApiEndpoints.API + '/search/units';
+}
+
+export class ApiExtensions {
+    // COMMENTS
+    // Use with units to create a url like:
+    // /api/unit/{unit_id}/comment/{comment_id}
+    public static COMMENTS = '/comments';
 }
