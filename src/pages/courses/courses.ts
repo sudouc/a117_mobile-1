@@ -53,7 +53,7 @@ export class CoursesPage {
             });
     }
 
-    public searchCourseDataList() {
+    public searchCourseDataList(){
         this.coursesProv.searchCourse(this.searchText).subscribe(
             (success) => {
                 console.log(this.items = success);
@@ -62,6 +62,7 @@ export class CoursesPage {
                 this.showError(error);
             }
         )
+    }
 
     }
 
@@ -70,7 +71,7 @@ export class CoursesPage {
         // Reset this list of courses to default (the search bar is cleared automatically by ionic)
         // This could be a web request to repopulate the list, or restore from storage for speed
         this.getCourseDataList();
-        console.log('Search cancel!');
+        console.log('Search cancelled.');
     }
 
     // Handler for the search bar input. Ionic debounces this for us (~250ms min between calls)
@@ -78,7 +79,7 @@ export class CoursesPage {
     // We don't actually use the contents of the event parameter in this one, but we could get the sample text from it rather than from
     public searchInput() {
         // Reset items back to all of the items
-
+        
         // If the value is an empty/whitespace string don't filter the items, there would be no point
         if (this.searchText && this.searchText.trim() != '') {
 
@@ -89,7 +90,7 @@ export class CoursesPage {
                 (item) => {
                     return (item.name.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1)
                         || // Code or name. In reality we'll let the api handle this
-                        (item.course_code.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
+                        (item.unit_code.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
                 });
         }
         // TODO: Show a message if there were no items found
@@ -122,3 +123,9 @@ export class CoursesPage {
     }
 
 }
+
+    public searchInput(event: any) {
+        if(this.searchText && this.searchText.trim() != ''){
+            this.searchCourseDataList();
+        } else{
+            this.getCourseDataList();
