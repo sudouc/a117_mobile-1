@@ -112,7 +112,7 @@ export class AuthService {
     public requestUser(): Observable<Response> {
 
         let options = new RequestOptions({ headers: this.getHeaders() });
-        let userRequest = this.http.get(ApiEndpoints.USER, options);
+        let userRequest = this.http.get(ApiEndpoints.USER_ME, options);
 
         userRequest.subscribe(
             (data) => {
