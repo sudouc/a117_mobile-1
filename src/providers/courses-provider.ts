@@ -52,7 +52,7 @@ export class CoursesProvider {
         return Observable.create(
             (observable) => {
                 // Make the HTTP request
-                this.http.get(ApiEndpoints.COURSES + '/' + id)
+                this.http.get(ApiEndpoints.COURSE + '/' + id)
                     .map((response) => response.json())
                     // map is just a function that gets applied no matter what comes back
                     // in this case we use it to always convert the object to a json representation of the response body
@@ -62,6 +62,8 @@ export class CoursesProvider {
                     // Check the docs for more info
                     // http://reactivex.io/documentation/operators/subscribe.html
                     (data) => {
+                        console.log("Get course by id got data");
+                        console.log(data);
                         observable.next(data);
                         observable.complete();
                     },

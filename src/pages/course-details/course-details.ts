@@ -10,18 +10,21 @@ import { CoursesProvider } from '../../providers/courses-provider';
 */
 @Component({
     selector: 'page-course-details',
-    templateUrl: 'course-details.html'
+    templateUrl: 'course-details.html',
 })
 export class CourseDetailsPage {
-    course: { name: string, unit_code: string }; // It would be a good idea to more strongly type this
+    course: { name: string, course_code: string }; // It would be a good idea to more strongly type this
+    courseString: string = "Testing display";
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private coursesProvider: CoursesProvider) { }
+        private coursesProvider: CoursesProvider) { 
+            this.course =  {name: "", course_code: ""};
+        }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad CourseDetailsPage');
+        // console.log('ionViewDidLoad CourseDetailsPage');
     }
 
     ionViewWillEnter() {
@@ -38,6 +41,7 @@ export class CourseDetailsPage {
         this.coursesProvider.getCourse(id).subscribe(
             (data) => {
                 this.course = data;
+                console.log(this.course.name);
             },
             (error) => {
                 // Currently we're just displaying the error
