@@ -15,11 +15,13 @@ import { CurrentUserPage } from '../pages/currentuser/currentuser';
 import { UnitDetailsPage } from '../pages/unit-details/unit-details';
 import { UnitsProvider } from '../providers/units-provider';
 
+import { CourseUnitsPage } from '../pages/course-units/course-units';
 import { CourseDetailsPage } from '../pages/course-details/course-details';
 import { CoursesProvider } from '../providers/courses-provider';
 
 import { HomePage } from '../pages/home/home';
 import { SearchProvider } from '../providers/search-provider';
+
 
 @NgModule({
     declarations: [
@@ -31,6 +33,7 @@ import { SearchProvider } from '../providers/search-provider';
         RegisterPage,
         CurrentUserPage,
         UnitDetailsPage,
+        CourseUnitsPage,
         CourseDetailsPage,
         HomePage
     ],
@@ -47,6 +50,7 @@ import { SearchProvider } from '../providers/search-provider';
         RegisterPage,
         CurrentUserPage,
         UnitDetailsPage,
+        CourseUnitsPage,
         CourseDetailsPage,
         HomePage
     ],

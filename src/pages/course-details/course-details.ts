@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { CoursesProvider } from '../../providers/courses-provider';
+import { CourseUnitsPage } from '../course-units/course-units';
 
 /*
   Generated class for the CourseDetails page.
@@ -49,6 +50,16 @@ export class CourseDetailsPage {
                 this.course = error;
             }
         )
+    }
+
+    courseUnitButtonClicked(){
+        console.log("button was clicked!");
+
+            this.navCtrl.push(
+            CourseUnitsPage,
+            // Provide the course id as a nav parameter
+            //{ id: item.id }
+        );
     }
 
     // TODO, fetch comments

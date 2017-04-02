@@ -22,21 +22,26 @@
         <h1>{{course?.name}}</h1>
         <h4>Course Code: {{course?.course_code}}</h4>
         <h4>Version: {{course?.course_version}}</h4>
-        <h4>Version: {{course?.location}}</h4>
+        <h4>Location: {{course?.location}}</h4>
         <!--<div class="card-subtitle">{{course?.name}}</div>-->
     </ion-card>
-    <ion-buttons padding end>    
+
+    <ion-buttons padding end>   
+
         <button ion-button icon-left>
         <ion-icon name="star"></ion-icon>
         Rate this Course
         </button>
-        <button ion-button icon-left>
+
+        <button (click)="courseUnitButtonClicked()" ion-button icon-left>
         <ion-icon name="book"></ion-icon>
         View Course Units
         </button>
+
         <button ion-button clear>
             {{course?.course_url}}
         </button>
+
     </ion-buttons>
 
     <!--TODO: Comment Display-->
