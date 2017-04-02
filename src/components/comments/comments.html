@@ -5,4 +5,18 @@
   for more info on Angular 2 Components.
 -->
 
-Type: {{entity_type | json}} <br> ID: {{entity_id | json}}
+<ion-list>
+    <ion-item *ngFor="let comment of comments">
+        <!-- Only icon (no text) -->
+        <button ion-button icon-left outline>
+            <ion-icon name="thumbs-up"></ion-icon>
+            Like ({{comment.likes || 0}})
+        </button>
+        <ion-avatar item-left>
+            <img src="{{comment?.user_dp_url || 'http://placehold.it/100x100'}}">
+        </ion-avatar>
+        <h2>{{comment?.title || "Untitled"}}</h2>
+        <h3>{{comment?.name || "Anonymous"}}</h3>
+        <p>{{comment?.text || "No Text"}}</p>
+    </ion-item>
+</ion-list>
