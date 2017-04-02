@@ -33,11 +33,10 @@ export class UnitsPage {
     // This could actually be a web API call or we could be loading from memory or storage
     getItems() {
         this.unitsProvider.getUnits().subscribe(
-            (response) => {
-                this.items = response;
-                if (this.searchText) {
-                    this.searchInput();
-                }
+            (success) => {
+                // 'success' is the return value of the observable,
+                // the CourseProvider.getCourses method resolves with a list object for this
+                this.items = success;
             },
             (error) => {
                 // This second anonymous method is called if there is some error with the observable
@@ -52,7 +51,7 @@ export class UnitsPage {
         // This could be a web request to repopulate the list, or restore from storage for speed
     }
 
-    public searchUnitDataList() {
+     public searchUnitDataList(){
         this.unitsProvider.searchUnit(this.searchText).subscribe(
             (success) => {
                 console.log(this.items = success);
@@ -78,17 +77,10 @@ export class UnitsPage {
         // Reset items back to all of the items
 
         // If the value is an empty/whitespace string don't filter the items, there would be no point
-        if (this.searchText && this.searchText.trim() != '') {
-
-            // A simple array filter to pretend we have a real search function, real world we might do this or farm the request out to an API
-            // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
-            // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
-            this.items = this.items.filter(
-                (item) => {
-                    return (item.name.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1)
-                        || // Code or name. In reality we'll let the api handle this
-                        (item.unit_code.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
-                });
+        if(this.searchText && this.searchText.trim() != ''){
+            this.searchUnitDataList();
+        } else {
+            this.getItems();
         }
 
         // TODO: Show a message if there were no items found
