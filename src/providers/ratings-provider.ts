@@ -36,4 +36,23 @@ export class RatingsProvider {
       )
   }
 
+  public getRatingsById(id){
+    return Observable.create(
+        (observable) => {
+            this.http.get(ApiEndpoints.UNITS + ApiExtensions.RATINGS + '/' + id)
+            .map(response => response.json())
+            .subscribe(
+                (data) => {
+                    console.log(data);
+                    observable.next(data);
+                    observable.complete();
+                },
+                (error) => {
+                    console.log(error);
+                    observable.error(error);
+                })
+        }
+    )
+  }
+
 }
