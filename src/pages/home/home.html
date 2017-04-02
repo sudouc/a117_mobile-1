@@ -16,12 +16,23 @@
         </ion-searchbar>
   </ion-toolbar>
 </ion-header>
-
-
-<ion-content>
-    <ion-list>
+ <ion-list>
         <button ion-item *ngFor="let item of placeholderItems" (click)="itemSelected(item)">
             {{ item.name }}
         </button>
     </ion-list>
+-->
+<ion-header>
+  <ion-title text-center position:absolute>Uni Help</ion-title><ion-label position:absolute text-right padding (click)="searchUnits()">+ profile</ion-label>
+</ion-header>
+<ion-content padding>
+   <ion-searchbar
+        [(ngModel)]="searchString" placeholder="Search" [showCancelButton]="false">
+   </ion-searchbar>
+   <button padding ion-button small color="light" (click)="searchUnits()">Units</button>
+   <button padding  align:right ion-button small color="light" (click)="searchCourses()">Courses</button>    
+     <ion-card>
+          <ion-title>Top Reviews</ion-title>
+
+     </ion-card>
 </ion-content>
