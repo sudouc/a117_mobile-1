@@ -20,7 +20,7 @@ export class UnitsProvider {
 
     public getUnits() {
         //request all units
-       return Observable.create(
+        return Observable.create(
             (observable) => {
                 // Make the HTTP request
                 this.http.get(ApiEndpoints.UNITS)
@@ -75,12 +75,12 @@ export class UnitsProvider {
     }
 
     // Search for units
-    public searchUnit(searchString){
+    public searchUnit(searchString) {
         // Encapsulating the whole request in an observable means we avoid race conditions with two subscribers (one in this service and in the subscriber)
         return Observable.create(
             (observable) => {
                 // Make the HTTP request
-                this.http.get(ApiEndpoints.UNITS_SEARCH +'/' + searchString)
+                this.http.get(ApiEndpoints.SEARCH_UNIT + '/' + searchString)
                     .map((response) => response.json())
                     .subscribe(
                     (data) => {
@@ -90,7 +90,7 @@ export class UnitsProvider {
                     (error) => {
                         observable.error(error);
                     }
-                )
+                    )
             }
         );
     }
