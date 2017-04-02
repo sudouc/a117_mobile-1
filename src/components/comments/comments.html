@@ -22,6 +22,8 @@
     </ion-card-content>
 </ion-card>
 
+<button ion-button full (click)="addComment()">Add Comment</button>
+
 <ion-list *ngIf="showContent()">
     <ion-item *ngFor="let comment of comments">
         <!-- Only icon (no text) -->
@@ -32,8 +34,7 @@
         <ion-avatar item-left>
             <img src="{{comment?.user_dp_url || 'http://baconmockup.com/100/100'}}">
         </ion-avatar>
-        <h2>{{comment?.title || "Untitled"}}</h2>
-        <h3>{{comment?.name || "Anonymous"}}</h3>
-        <p>{{comment?.text || "No Text"}}</p>
+        <h2>{{comment?.name || "Anonymous"}}</h2>
+        <h3>{{comment?.comment || "Anonymous"}}</h3>
     </ion-item>
 </ion-list>

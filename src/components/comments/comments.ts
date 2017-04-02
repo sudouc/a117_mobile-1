@@ -55,4 +55,8 @@ export class CommentsComponent {
     public showEmpty() {
         return this.comments === [];
     }
+
+    public addComment() {
+        throw Error("Add comment not implemented!");
+    }
 }
