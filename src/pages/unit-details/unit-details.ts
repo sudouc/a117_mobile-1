@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UnitsProvider } from '../../providers/units-provider';
+import { RatingsPage } from '../ratings/ratings';
 
 /*
   Generated class for the UnitDetails page.
@@ -33,7 +34,7 @@ export class UnitDetailsPage {
     getUnit() {
         // Grab the unit id out of the nav parameter
         let unit_id = this.navParams.get('unit_id');
-        
+
 
         // Request the unit details from the provider
         // We may want to show a loading icon while this is happening
@@ -48,6 +49,11 @@ export class UnitDetailsPage {
                 this.unit = error;
             }
         )
+    }
+
+    goToRatings(){
+        //TODO optionally optimize by sending only details required by RatingsPage
+        this.navCtrl.push(RatingsPage, {unit: this.unit});
     }
 
     // TODO, fetch comments
