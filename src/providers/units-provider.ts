@@ -19,12 +19,11 @@ export class UnitsProvider {
     submitted: boolean = false;
     ratingData: any;
 
-    constructor(public http: Http, private auth: AuthService) {
-        console.log('Hello UnitsProvider Provider');
-    }
+    constructor(public http: Http, private auth: AuthService) { }
 
     public getUnits() {
         //request all units
+
         return Observable.create(
             (observable) => {
                 // Make the HTTP request
@@ -38,12 +37,10 @@ export class UnitsProvider {
                     // Check the docs for more info
                     // http://reactivex.io/documentation/operators/subscribe.html
                     (data) => {
-                        console.log(data);
                         observable.next(data);
                         observable.complete();
                     },
                     (error) => {
-                        console.log(error);
                         observable.error(error);
                     })
             }
@@ -67,12 +64,10 @@ export class UnitsProvider {
                     // Check the docs for more info
                     // http://reactivex.io/documentation/operators/subscribe.html
                     (data) => {
-                        console.log(data);
                         observable.next(data);
                         observable.complete();
                     },
                     (error) => {
-                        console.log(error);
                         observable.error(error);
                     })
             }
@@ -94,6 +89,9 @@ export class UnitsProvider {
 
     // Search for units
     public searchUnit(searchString) {
+        if (!searchString.trim()) {
+            return this.getUnits();
+        }
         // Encapsulating the whole request in an observable means we avoid race conditions with two subscribers (one in this service and in the subscriber)
         return Observable.create(
             (observable) => {
@@ -107,8 +105,7 @@ export class UnitsProvider {
                     },
                     (error) => {
                         observable.error(error);
-                    }
-                    )
+                    })
             }
         );
     }
@@ -133,7 +130,6 @@ export class UnitsProvider {
                         observable.complete();
                     },
                     (error) => {
-                        console.log(error);
                         observable.error(error);
                     })
             }

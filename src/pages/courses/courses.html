@@ -12,7 +12,8 @@
 
     <!-- BEGIN SEARCH BAR wrapped in a toolbar-->
     <ion-toolbar>
-        <ion-searchbar [(ngModel)]="searchText" (ionInput)="searchInput()" [showCancelButton]="true" (ionCancel)="searchCancel($event)"></ion-searchbar>
+        <ion-searchbar [(ngModel)]="searchText" (ionInput)="searchInput()" [showCancelButton]="true" (ionCancel)="searchCancel()"
+            (ionClear)="searchCancel()"></ion-searchbar>
     </ion-toolbar>
     <!--END SEARCH BAR-->
 

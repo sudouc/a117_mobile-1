@@ -14,9 +14,7 @@ import { ApiEndpoints, AppConstants } from '../app/constants';
 @Injectable()
 export class CoursesProvider {
 
-    constructor(public http: Http) {
-        console.log('Hello CoursesProvider Provider');
-    }
+    constructor(public http: Http) { }
 
     public getCourses() {
         // Make a request for a specific course
@@ -39,22 +37,22 @@ export class CoursesProvider {
                         observable.complete();
                     },
                     (error) => {
-                        console.log(error);
                         observable.error(error);
-                    }
-                    )
+                    })
             }
         );
     }
 
-     public searchCourse(searchString) {
-        // Search  for courses
-
+    public searchCourse(searchString) {
+        if (!searchString.trim()) {
+            return this.getCourses();
+        }
+        // Search for courses if there is a search string
         // Encapsulating the whole request in an observable means we avoid race conditions with two subscribers (one in this service and in the subscriber)
         return Observable.create(
             (observable) => {
                 // Make the HTTP request
-                this.http.get(ApiEndpoints.SEARCH_COURSE + '/' + searchString)
+                this.http.get(ApiEndpoints.SEARCH_COURSE + '/' + searchString.trim())
                     .map((response) => response.json())
                     // map is just a function that gets applied no matter what comes back
                     // in this case we use it to always convert the object to a json representation of the response body
@@ -70,6 +68,7 @@ export class CoursesProvider {
                     (error) => {
                         observable.error(error);
                     })
+
             }
         );
     }
@@ -91,8 +90,6 @@ export class CoursesProvider {
                     // Check the docs for more info
                     // http://reactivex.io/documentation/operators/subscribe.html
                     (data) => {
-                        console.log("Get course by id got data");
-                        console.log(data);
                         observable.next(data);
                         observable.complete();
                     },
