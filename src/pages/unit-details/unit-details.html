@@ -6,14 +6,18 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Unit Details</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Unit Details</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <button ion-button icon-left (click)="goToRatings()">
+        <ion-icon name="star"></ion-icon>
+        Unit Ratings
+    </button>
   <!--TODO: Format nicely-->
   <ion-list>
     <ion-item>
@@ -62,6 +66,24 @@
       Deleted: {{unit?.deleted_at}}
     </ion-item>
   </ion-list>
+
+    <!--TODO: Comment Display-->
+    <comments [entity-type]="'unit'" [entity-id]="unit?.id">
+    </comments>
+  <ion-card *ngFor="let rating of ratings">
+      <ion-card-header>
+        Rating ID: {{ rating.id }}
+      </ion-card-header>
+      <ion-card-content>
+        Difficulty: {{ rating.difficulty}}<br>
+        Satisfaction: {{ rating.satisfaction }}<br>
+        Engagement: {{ rating.engagement }}<br>
+        Assistance: {{ rating.assistance }}<br>
+        Practical: {{ rating.practical }}<br>
+        Created at: {{ rating.created_at }}<br>
+        Updated at: {{ rating.updated_at}}<br>
+      </ion-card-content>
+  </ion-card>
 
   <!--TODO: Comment Display-->
 

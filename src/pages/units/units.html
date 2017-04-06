@@ -12,7 +12,8 @@
 
     <!-- BEGIN SEARCH BAR wrapped in a toolbar-->
     <ion-toolbar>
-        <ion-searchbar [(ngModel)]="searchText" (ionInput)="searchInput($event)" [showCancelButton]="true" (ionCancel)="searchCancel($event)"></ion-searchbar>
+        <ion-searchbar [(ngModel)]="searchText" (ionInput)="searchInput()" [showCancelButton]="true" (ionCancel)="searchCancel()"
+            (ionClear)="searchCancel()"></ion-searchbar>
     </ion-toolbar>
     <!--END SEARCH BAR-->
 
@@ -20,7 +21,7 @@
 
 <ion-content>
     <!--BEGIN LIST OF ITEMS-->
-    <ion-list  *ngIf="showContent()">
+    <ion-list *ngIf="showContent()">
         <!--This is a single item, the *ngFor tells angular2 to repeat it for every element in the 'items' array in our class-->
         <ion-item *ngFor="let item of items" (click)="itemSelected(item)">
             <!--We use double curly braces {{}} to indicate we want to pull the value out of a variable-->

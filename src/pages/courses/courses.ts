@@ -3,6 +3,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { CoursesProvider } from '../../providers/courses-provider'
 import { CourseDetailsPage } from '../course-details/course-details';
 
+
 /*
   Generated class for the Courses page.
 
@@ -15,6 +16,7 @@ import { CourseDetailsPage } from '../course-details/course-details';
 })
 export class CoursesPage {
     searchText: string = '';
+    searchParameter: string = '';
     items: any[];
 
     //searcParams: URLSearchParams = new URLSearchParams(this.searchText); //Might be useful later
@@ -23,43 +25,36 @@ export class CoursesPage {
         private alertCtrl: AlertController) { }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad CoursesPage');
-
-        // Populate the list of items when this view loads
-        this.getCourseDataList();
+        console.log('ionViewDidLoad CoursesPage  ||  ' + this.searchText);
 
     }
 
-    public getCourseDataList() {
-        this.coursesProv.getCourses().subscribe(
-            (success) => {
-                // 'success' is the return value of the observable,
-                // the CourseProvider.getCourses method resolves with a list object for this
-                this.items = success;
-            },
-            (error) => {
-                // This second anonymous method is called if there is some error with the observable
-                this.showError(error.message);
-            });
+    ionViewWillLoad() {
+        if (this.navParams.get('searchParam')) {
+            this.searchText = this.navParams.get('searchParam');
+        } else {
+            this.searchText = '';
+        }
+        this.searchCourseDataList();
     }
 
     public searchCourseDataList() {
         this.coursesProv.searchCourse(this.searchText).subscribe(
             (success) => {
-                console.log(this.items = success);
+                this.items = success;
             },
             (error) => {
                 this.showError(error);
             }
         )
-
     }
 
     // Handler for presses on the cancel button
-    public searchCancel(event: any) {
+    public searchCancel() {
+        this.searchText = '';
         // Reset this list of courses to default (the search bar is cleared automatically by ionic)
         // This could be a web request to repopulate the list, or restore from storage for speed
-        this.getCourseDataList();
+        this.searchCourseDataList();
         console.log('Search cancelled.');
     }
 
@@ -67,12 +62,7 @@ export class CoursesPage {
     // Though that can be changed https://ionicframework.com/docs/v2/api/components/searchbar/Searchbar/
     // We don't actually use the contents of the event parameter in this one, but we could get the sample text from it rather than from
     public searchInput(event: any) {
-        if (this.searchText && this.searchText.trim() != '') {
-            this.searchCourseDataList();
-        } else {
-            this.getCourseDataList();
-        }
-        // TODO: Show a message if there were no items found
+        this.searchCourseDataList()
     }
 
     // Click callback when one of the items in the list is clicked on

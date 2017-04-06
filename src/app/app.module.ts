@@ -14,12 +14,16 @@ import { CurrentUserPage } from '../pages/currentuser/currentuser';
 
 import { UnitDetailsPage } from '../pages/unit-details/unit-details';
 import { UnitsProvider } from '../providers/units-provider';
+import { RatingsProvider } from '../providers/ratings-provider';
 
 import { CourseDetailsPage } from '../pages/course-details/course-details';
 import { CoursesProvider } from '../providers/courses-provider';
 
 import { HomePage } from '../pages/home/home';
 import { SearchProvider } from '../providers/search-provider';
+import { RatingsPage } from '../pages/ratings/ratings';
+
+import { CommentsComponent } from '../components/comments/comments';
 
 @NgModule({
     declarations: [
@@ -32,7 +36,9 @@ import { SearchProvider } from '../providers/search-provider';
         CurrentUserPage,
         UnitDetailsPage,
         CourseDetailsPage,
-        HomePage
+        CommentsComponent,
+        HomePage,
+        RatingsPage
     ],
     imports: [
         IonicModule.forRoot(MyApp)
@@ -48,14 +54,16 @@ import { SearchProvider } from '../providers/search-provider';
         CurrentUserPage,
         UnitDetailsPage,
         CourseDetailsPage,
-        HomePage
+        HomePage,
+        RatingsPage
     ],
     providers: [
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         AuthService,
         UnitsProvider,
         CoursesProvider,
-        SearchProvider
+        SearchProvider,
+        RatingsProvider
     ]
 })
 export class AppModule { }
